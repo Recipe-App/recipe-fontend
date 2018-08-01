@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Register from './components/register.js';
+import Register from './pages/register.js';
 
 class App extends Component {
   render() {
