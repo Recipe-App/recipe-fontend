@@ -14,18 +14,17 @@ class LoginForm extends Component {
         }
     }
 
-    handleChange(e){
-       this.setState({ [e.target.name]: e.target.value })
+    handleChange(event){
+       this.setState({ [event.target.name]: event.target.value })
     }
 
-    handleFormSubmit(e){
-        e.preventDefault()
+    handleFormSubmit(event){
+        event.preventDefault()
+        console.log(this.props);
         this.Auth.login(this.state.email,this.state.password)
-            .then(successUser => {
-                console.log("SUCCESS! You Logged In ", successUser);
-            })
-                // .then(res =>{this.props.history.replace('/')})
-                //     .catch(err =>{ alert(err) })
+            // .then(res => {console.log(res);})
+            .then(res =>{this.props.history.replace('/landing')})
+                .catch(err =>{ alert(err) })
     }
 
     render() {
@@ -33,23 +32,23 @@ class LoginForm extends Component {
             <form onSubmit={this.handleFormSubmit.bind(this)}>
             <h1>Welcome to the Login Page!</h1>
                 <FormGroup>
-                        <ControlLabel>Email</ControlLabel>
-                        <FormControl
-                            type='text'
-                            name='email'
-                            value={this.state.value}
-                            placeholder="Email"
-                            onChange={this.handleChange.bind(this)}/><br/>
+                    <ControlLabel>Email</ControlLabel>
+                    <FormControl
+                        type='text'
+                        name='email'
+                        value={this.state.value}
+                        placeholder="Email"
+                        onChange={this.handleChange.bind(this)}/><br/>
 
-                        <ControlLabel>Password</ControlLabel>
-                        <FormControl
-                            type='password'
-                            name='password'
-                            value={this.state.value}
-                            placeholder="Password"
-                            onChange={this.handleChange.bind(this)}/><br/>
+                    <ControlLabel>Password</ControlLabel>
+                    <FormControl
+                        type='password'
+                        name='password'
+                        value={this.state.value}
+                        placeholder="Password"
+                        onChange={this.handleChange.bind(this)}/><br/>
 
-                        <Button bsStyle="danger" type='submit' value='submit'>Login</Button>
+                    <Button bsStyle="danger" type='submit' value='submit'>Login</Button>
                     </FormGroup>
                 </form>
 
