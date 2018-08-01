@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-
-=======
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Register from './pages/register.js';
 import Login from './pages/login'
 import Header from './components/header'
 import Landing from './pages/landing'
->>>>>>> master
 
 class App extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-
-=======
         <Router>
         <div>
         <Header />
@@ -26,7 +19,6 @@ class App extends Component {
             </div>
             </div>
         </Router>
->>>>>>> master
       </div>
     );
   }
