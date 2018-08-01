@@ -4,7 +4,7 @@ import LoginForm from '../components/login'
 class Login extends Component {
     render() {
         return(
-            <LoginForm />
+            <LoginForm history = {this.props.history}/>
         )
     }
 }
