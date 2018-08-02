@@ -10,7 +10,7 @@ class ApiForm extends Component {
   }
 
   componentWillMount(){
-    fetch(`https://api.edamam.com/search?q=fish,carrot,salsa&app_id=${process.env.REACT_APP_ID_CODE}&app_key=${process.env.REACT_APP_KEY}&from=0&to=10`)
+    fetch(`https://api.edamam.com/search?q=fish,carrot,salsa&app_id=${process.env.REACT_APP_ID_CODE}&app_key=${process.env.REACT_APP_KEY}&from=0&to=5`)
 
     .then((rawResponse)=>{
       return rawResponse.json()
