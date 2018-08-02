@@ -8,6 +8,7 @@ export default class AuthService {
     }
 
     login(email, password) {
+        console.log(password,email);
       return this.fetch(`${this.domain}/user_token`, { // Our backend endpoint
         method: 'POST',
         body: JSON.stringify({
@@ -82,6 +83,7 @@ export default class AuthService {
       })
       .then(this._checkStatus)
       .then(response => response.json())
+
     }
 
     _checkStatus(response) {
