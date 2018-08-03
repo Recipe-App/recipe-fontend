@@ -4,10 +4,9 @@ import Register from './pages/register.js';
 import Login from './pages/login'
 import LandingForm from './pages/landing'
 import LandingHeader from './pages/landing'
-import LandingNavbar from './pages/landing'
-
-
-
+import Header from './components/header'
+import Landing from './pages/landing'
+import AccountInfo from './components/AccountInfo'
 
 class App extends Component {
   render() {
@@ -16,9 +15,10 @@ class App extends Component {
         <Router>
         <div>
             <div>
-                <Route path='/landing' component={LandingHeader, LandingForm, LandingNavbar} />
+                <Route path='/landing' component={LandingHeader, LandingForm} />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
+                <Route path='/account' component={AccountInfo} />
             </div>
             </div>
         </Router>
