@@ -5,6 +5,9 @@ import Login from './pages/login'
 import Header from './components/header'
 import Landing from './pages/landing'
 import AccountInfo from './components/AccountInfo'
+import NewRecipes from './components/new_recipes'
+
+
 class App extends Component {
   render() {
     return (
@@ -17,6 +20,7 @@ class App extends Component {
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
                 <Route path='/account' component={AccountInfo} />
+                <Route path='/recipes' component={NewRecipes} />
             </div>
             </div>
         </Router>
