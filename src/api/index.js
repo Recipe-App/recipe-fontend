@@ -47,6 +47,23 @@ let saveRecipes = (recipe) => {
       // })
 }
 
+let getSaved = () => {
+  return fetch("http://localhost:3001/saved_recipes", {
+
+      body: JSON.stringify(recipe),
+      headers: {
+          'Content-Type': 'application/json'
+
+      },
+      method: "POST"
+  })  .then((resp) => console.log(resp))
+      // .then((resp) => {
+      //     let json = resp.json()
+      //
+      //     return json
+      // })
+}
+
 export {
 
   createUser,
