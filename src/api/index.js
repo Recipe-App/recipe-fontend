@@ -5,7 +5,7 @@ let createUser = function(user) {
         body: JSON.stringify(user),
         headers: {
             'Content-Type': 'application/json'
-            
+
         },
         method: "POST"
     })
@@ -16,4 +16,23 @@ let createUser = function(user) {
         })
 }
 
-export default createUser
+
+let createPantryItems= function(pantry) {
+
+    return fetch("http://localhost:3001/pantry_item", {
+
+        body: JSON.stringify(pantry),
+        headers: {
+            'Content-Type': 'application/json'
+
+        },
+        method: "POST"
+    })
+        .then((resp) => {
+            let json = resp.json()
+
+            return json
+        })
+}
+
+export default { createUser, createPantryItems }

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Register from './pages/register.js';
 import Login from './pages/login'
-import Header from './components/header'
-import Landing from './pages/landing'
+import LandingForm from './pages/landing'
+import LandingHeader from './pages/landing'
+import LandingNavbar from './pages/landing'
+
+
+
 
 class App extends Component {
   render() {
@@ -11,9 +15,8 @@ class App extends Component {
       <div>
         <Router>
         <div>
-        <Header />
             <div>
-                <Route exact path='/landing' component={Landing} />
+                <Route path='/landing' component={LandingHeader, LandingForm, LandingNavbar} />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
             </div>
