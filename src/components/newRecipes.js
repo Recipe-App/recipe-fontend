@@ -20,7 +20,7 @@ class NewRecipes extends Component {
     }
 
     componentWillMount(){
-      let data = ["chicken", "carrots", "onions"]
+      let data = ["mexican"]
       let pantry = data.join(',')
       getRecipes(pantry)
           .then(obj => {
@@ -50,17 +50,7 @@ class NewRecipes extends Component {
         let { saved } = this.state
         let { recipes } = this.state.apiResp
 
-        // let savedUrls = saved.recipes.map((parsedRecipe) => {
-        //   return parsedRecipe.url
-        // })
-
         let toSave = {recipe: this.processRecipe(recipes[id])}  //This method works
-
-        // if(!savedUrls.includes(recipes[id].recipe.url)){
-        //   saved.recipes.push(toSave)  //The objects are being pushed
-        //   this.setState({ saved: saved }) //It's even saving into state
-        // }
-
         saveRecipes(toSave)
     }
 
