@@ -35,7 +35,6 @@ class RegisterForm extends Component {
 
         form.user.password_confirmation = form.user.password
 
-        console.log(form);
     createUser(form)
     .then(successUser => {
         console.log("SUCCESS! New user: ", successUser);
