@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Header from './components/header'
 import Register from './pages/register.js';
 import Login from './pages/login'
-import Header from './components/header'
 import Landing from './pages/landing'
-import AccountInfo from './components/AccountInfo'
-import NewRecipes from './components/newRecipes'
+import Recipes from './pages/recipes'
 import Saved from './pages/saved'
+import Profile from './pages/profile'
 
 
 class App extends Component {
@@ -17,11 +17,11 @@ class App extends Component {
         <div>
         <Header />
             <div>
-                <Route exact path='/landing' component={Landing} />
+                <Route exact path='/' component={Landing} />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
-                <Route path='/account' component={AccountInfo} />
-                <Route path='/recipes' component={NewRecipes} />
+                <Route path='/profile' component={Profile} />
+                <Route path='/recipes' component={Recipes} />
                 <Route path='/saved' component={Saved} />
             </div>
             </div>

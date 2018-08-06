@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Image, Button } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
-import getSaved from '../api/index'
+import { getSaved } from '../api/index'
 
 class SavedRecipes extends Component {
 
@@ -14,10 +14,8 @@ class SavedRecipes extends Component {
   }
 
   componentWillMount(){
-    const userId = this.Auth.getUserId()
-    this.Auth.fetch(`http://localhost:3001/saved_recipes/${userId}`)
-      .then( res => {this.setState({ saved: res.recipes })
-    })
+    getSaved()
+      .then( res => {this.setState({ saved: res.recipes })})
   }
 
   render() {
