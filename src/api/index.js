@@ -1,4 +1,9 @@
-let createUser = function(user) {
+import AuthService from '../services/AuthService'
+const Auth = new AuthService()
+
+const userId = Auth.getUserId()
+
+let createUser = (user) => {
 
     return fetch("http://localhost:3001/users", {
 
@@ -35,22 +40,33 @@ let saveRecipes = (recipe) => {
 
       body: JSON.stringify(recipe),
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Auth.getToken()
+
 
       },
       method: "POST"
-  })  .then((resp) => console.log(resp))
-      // .then((resp) => {
-      //     let json = resp.json()
-      //
-      //     return json
-      // })
+  })  .then((resp) => {
+          let json = resp.json()
+
+          return json
+      })
+}
+
+let getProfile = () => {
+  return Auth.fetch(`http://localhost:3001/users/${userId}`)
+}
+
+let getSaved = () => {
+  return Auth.fetch(`http://localhost:3001/saved_recipes/${userId}`)
 }
 
 export {
 
   createUser,
   getRecipes,
-  saveRecipes
+  saveRecipes,
+  getProfile,
+  getSaved
 
 }

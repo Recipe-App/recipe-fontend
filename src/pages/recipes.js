@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NewRecipes from '../components/new_recipes'
+import NewRecipes from '../components/newRecipes'
 
 class Recipes extends Component {
     render() {
