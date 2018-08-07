@@ -1,54 +1,67 @@
 import React, {Component} from 'react'
-import { ControlLabel, Button, FormControl, FormGroup, } from 'react-bootstrap'
+import { ControlLabel, Button, FormControl, FormGroup} from 'react-bootstrap'
+import {createPantryItems} from '../api/index'
+import AuthService from '../services/AuthService';
 
 class LandingForm extends Component{
     constructor(props){
         super(props)
+        this.Auth = new AuthService()
         this.state = {
             form: {
-                pantry_items: {
-                    meat: "",
-                    vegetables: "",
+                pantry_item: {
+                    proteins: "",
+                    veggies: "",
                     grains: "",
-                    spices: "",
-                    other: ""
+                    seasonings: "",
+                    other: "",
                 }
             }
         }
     }
     handleChange(event){
-        console.log(event)
-        let { form } = this.state
-        form.pantry_items[event.target.name]= event.target.value
+        let {form} = this.state
+        form.pantry_item[event.target.name]= event.target.value
         this.setState({form: form})
 
     }
-    handleSumbit(event){
+    handleSubmit(event){
         event.preventDefault()
-        let {form} = this.state
+        let { form } = this.state
+        console.log(form);
+
+        createPantryItems(form)
+        .then(successPantry => {
+            console.log("CREATE SUCCESS!", successPantry);
+
+        })
+
 
 }
+
+
+
     render() {
         return(
-                <form onSubmit={this.handleChange.bind(this)}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup>
                         <ControlLabel>Protein</ControlLabel>
                             <FormControl
                                 type='text'
-                                name='Protein'
+                                name='proteins'
                                 value={this.state.value}
                                 placeholder="Enter Protein"
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>vegetables</ControlLabel>
+                        <ControlLabel>Vegetables</ControlLabel>
                             <FormControl
                                 type='text'
-                                name='vegetables'
+                                name='veggies'
                                 value={this.state.value}
-                                placeholder="Enter Vegetable"
+                                placeholder="Enter Vegetables"
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>grains</ControlLabel>
+                        <ControlLabel>Grains</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='grains'
@@ -56,21 +69,22 @@ class LandingForm extends Component{
                                 placeholder="Enter Grains"
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>spices</ControlLabel>
+                        <ControlLabel>Spices</ControlLabel>
                             <FormControl
                                 type='text'
-                                name='spices'
+                                name='seasonings'
                                 value={this.state.value}
                                 placeholder="Enter Spices"
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>other</ControlLabel>
+                        <ControlLabel>Other</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='other'
                                 value={this.state.value}
-                                placeholder="Enter Other"
+                                placeholder="Other"
                                 onChange={this.handleChange.bind(this)}/>
+
 
                         <Button bsStyle="primary" type='submit' value='submit'>submit</Button>
 

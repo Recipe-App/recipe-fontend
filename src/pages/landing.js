@@ -7,9 +7,9 @@ class Landing extends Component {
         render() {
             return(
                 <div>
-                <LandingHeader />
-                <LandingForm />
-                </div>
+                {this.props.success &&
+                    <Redirect to="/landing" />}
+                    </div>
             )
         }
     }

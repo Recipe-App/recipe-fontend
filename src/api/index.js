@@ -19,7 +19,7 @@ let createUser = function(user) {
 
 let createPantryItems= function(pantry) {
 
-    return fetch("http://localhost:3001/pantry_item", {
+    return fetch("http://localhost:3001/pantry_items", {
 
         body: JSON.stringify(pantry),
         headers: {
@@ -35,4 +35,4 @@ let createPantryItems= function(pantry) {
         })
 }
 
-export default { createUser, createPantryItems }
+export { createUser, createPantryItems }

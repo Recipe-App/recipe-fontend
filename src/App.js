@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Register from './pages/register.js';
 import Login from './pages/login'
-import LandingForm from './pages/landing'
-import LandingHeader from './pages/landing'
-import Header from './components/header'
-import Landing from './pages/landing'
+import LandingForm from './components/landingForm'
+import LandingHeader from './components/landingHeader'
 import AccountInfo from './components/AccountInfo'
 
 class App extends Component {
@@ -15,7 +13,12 @@ class App extends Component {
         <Router>
         <div>
             <div>
-                <Route path='/landing' component={LandingHeader, LandingForm} />
+                <Route path='/landing' render ={props =>
+                <div>
+                    <LandingHeader />
+                    <LandingForm />
+                </div>
+            } />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
                 <Route path='/account' component={AccountInfo} />
