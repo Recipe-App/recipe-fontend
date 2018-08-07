@@ -81,6 +81,24 @@ let deleteRecipe = (recipeID) => {
       })
 }
 
+let createPantryItems= function(pantry) {
+
+    return fetch("http://localhost:3001/pantry_items", {
+
+        body: JSON.stringify(pantry),
+        headers: {
+            'Content-Type': 'application/json'
+
+        },
+        method: "POST"
+    })
+        .then((resp) => {
+            let json = resp.json()
+
+            return json
+        })
+}
+
 export {
 
   createUser,
@@ -88,6 +106,7 @@ export {
   saveRecipes,
   getProfile,
   getSaved,
-  deleteRecipe
+  deleteRecipe,
+  createPantryItems
 
 }
