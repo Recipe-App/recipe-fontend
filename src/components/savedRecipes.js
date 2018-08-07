@@ -1,29 +1,34 @@
 import React, { Component } from 'react'
 import { Image, Button } from 'react-bootstrap'
-import AuthService from '../services/AuthService'
-import { getSaved } from '../api/index'
+
 
 class SavedRecipes extends Component {
 
   constructor(props){
     super(props)
-    this.Auth = new AuthService()
     this.state = {
-      saved: []
+      ids: []
     }
   }
 
-  componentWillMount(){
-    getSaved()
-      .then( res => {this.setState({ saved: res.recipes })})
+  handleClick(event){
+    let id = parseInt(event.target.id)
+    let { ids } = this.state
+    let { saved } = this.state
+
+    !ids.includes(id) && ids.push(id)
+    sessionStorage.setItem("ids", ids)
+  }
+
+  handleDelete(){
+
   }
 
   render() {
-    console.log(this.state.saved);
       return(
         <div>
-        { this.state.saved.length != 0 &&
-          this.state.saved.map((recipe) => {
+        {
+          this.props.saved.recipes.map((recipe,index) => {
           return(
             <form>
             <fieldset>
@@ -38,6 +43,9 @@ class SavedRecipes extends Component {
                 </div>
               )
             })}
+            <Button id={`${index}`} bsStyle="danger" onClick={this.handleDelete.bind(this)}>Unsave</Button>
+
+            <Button id={`${index}`} bsStyle="success" onClick={this.handleClick.bind(this)}>Add To Grocery List</Button><br/><br/><br/>
             </fieldset>
             </form>
           )
@@ -48,5 +56,3 @@ class SavedRecipes extends Component {
 }
 
 export default SavedRecipes
-
-// <Button id={`${index}`} bsStyle="danger" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/>
