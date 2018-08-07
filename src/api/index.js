@@ -64,19 +64,20 @@ let getSaved = () => {
 
 //These are all of our delete methods
 
-let deleteRecipe = (recipe) => {
-  return fetch("http://localhost:3001/saved_recipes/", {
+let deleteRecipe = (recipeID) => {
+  return fetch(`http://localhost:3001/saved_recipes/${recipeID}`, {
 
-      body: JSON.stringify(recipe),
+      body: JSON.stringify(recipeID),
       headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + Auth.getToken()
       },
       method: "DELETE"
   })  .then((resp) => {
+          console.log(resp);
           let json = resp.json()
 
-          return json
+          return Promise.resolve(resp);
       })
 }
 

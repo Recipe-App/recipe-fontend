@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Button } from 'react-bootstrap'
+import {deleteRecipe} from '../api/index'
 
 
 class SavedRecipes extends Component {
@@ -20,7 +21,11 @@ class SavedRecipes extends Component {
     sessionStorage.setItem("ids", ids)
   }
 
-  handleDelete(){
+  handleDelete(event){
+    console.log(event.target.id)
+    deleteRecipe(event.target.id)
+    window.location.reload(true)
+
 
   }
 
@@ -35,6 +40,7 @@ class SavedRecipes extends Component {
             <Image src={recipe.image} circle/>
             <h1> {recipe.label} </h1>
             <a href={recipe.url}>{recipe.url}</a>
+            const recipeID = {recipe.id}
 
             {recipe.ingredients.split().map((item) =>{
               return(
@@ -43,7 +49,7 @@ class SavedRecipes extends Component {
                 </div>
               )
             })}
-            <Button id={`${index}`} bsStyle="danger" onClick={this.handleDelete.bind(this)}>Unsave</Button>
+            <Button id={`${recipe.id}`} bsStyle="danger" onClick={this.handleDelete.bind(this)}>Unsave</Button>
 
             <Button id={`${index}`} bsStyle="success" onClick={this.handleClick.bind(this)}>Add To Grocery List</Button><br/><br/><br/>
             </fieldset>
