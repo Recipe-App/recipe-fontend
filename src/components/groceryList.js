@@ -5,16 +5,17 @@ class GroceryList extends Component {
   constructor(props){
     super(props)
     this.state = {
-      ids: sessionStorage.getItem('ids').split(',')
+      ids: !null && sessionStorage.getItem('ids')
     }
   }
 
     render() {
+      console.log(this.props.saved.recipes)
       console.log(this.state.ids);
         return(
           <div>
           {this.state.ids != undefined &&
-            this.state.ids.map((id) => {
+            this.state.ids.split(',').map((id) => {
             return (
               <div>
               <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
