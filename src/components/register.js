@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ControlLabel, Button, FormControl, FormGroup } from 'react-bootstrap'
-import {createUser} from '../api/index'
+import { createUser } from '../api/index'
 
 
 class RegisterForm extends Component {

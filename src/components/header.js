@@ -23,13 +23,23 @@ class Header extends Component {
         <Nav>
             {Auth.loggedIn()
 
-                ? <div><NavItem onClick={this.handleLogout}>
+                ? <div>
+                  <NavItem onClick={this.handleLogout}>
                     <Link to="/login">Logout</Link>
-                </NavItem></div>
+                  </NavItem>
+
+                  <NavItem>
+                    <Link to="/profile">Profile</Link>
+                  </NavItem>
+
+                  <NavItem>
+                    <Link to="/saved">Saved</Link>
+                  </NavItem>
+                  </div>
 
                 : <NavItem>
                     <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
-                </NavItem>
+                  </NavItem>
             }
         </Nav>
         </Navbar>

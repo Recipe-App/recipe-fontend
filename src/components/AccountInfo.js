@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import AuthService from '../services/AuthService'
+import { getProfile } from '../api/index'
 
-
-
-const Auth = new AuthService()
 class AccountInfo extends Component {
   constructor(props){
     super(props);
@@ -13,13 +10,13 @@ class AccountInfo extends Component {
   }
 
   componentWillMount(){
-    const userId = Auth.getUserId()
-    Auth.fetch(`http://localhost:3001/users/${userId}`).then( res => {
-      this.setState({ user: res })
+    getProfile()
+      .then( res => {this.setState({ user: res })
     })
   }
 
   render() {
+    console.log("Profile",this.state.user);
     return (
       <div>
       <h1> {this.state.user.first_name} </h1>
