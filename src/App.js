@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Register from './pages/register.js';
 import Login from './pages/login'
 import LandingForm from './components/landingForm'
-import LandingHeader from './components/landingHeader'
+import Header from './components/header'
 import AccountInfo from './components/AccountInfo'
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
             <div>
                 <Route path='/landing' render ={props =>
                 <div>
-                    <LandingHeader />
+                    <Header />
                     <LandingForm />
                 </div>
             } />
