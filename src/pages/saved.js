@@ -23,7 +23,10 @@ class Saved extends Component {
         return(
           <div>
           {this.state.saved.length != 0 &&
+            <div>
             <SavedRecipes saved={this.state.saved}/>
+            <GroceryList saved={this.state.saved}/>
+            </div>
           }
           </div>
         )
@@ -31,5 +34,3 @@ class Saved extends Component {
 }
 
 export default Saved
-
-// <GroceryList saved={this.state.saved}/>

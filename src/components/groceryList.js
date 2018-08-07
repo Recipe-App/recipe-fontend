@@ -5,22 +5,20 @@ class GroceryList extends Component {
   constructor(props){
     super(props)
     this.state = {
-      saved: this.props.saved,
-      ids: [...sessionStorage.getItem('ids')]
+      ids: sessionStorage.getItem('ids').split(',')
     }
   }
 
     render() {
-      // console.log(this.state.ids);
-      // console.log(this.state.saved);
+      console.log(this.state.ids);
         return(
           <div>
           {this.state.ids != undefined &&
             this.state.ids.map((id) => {
             return (
               <div>
-              <h1>{this.state.saved[parseInt(id)].label}</h1>
-              <h1>{this.state.saved[id].ingredients}</h1>
+              <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
+              <h1>{this.props.saved.recipes[parseInt(id)].ingredients}</h1>
               </div>
             )
           })
