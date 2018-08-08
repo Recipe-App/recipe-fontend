@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { ControlLabel, Button, FormControl, FormGroup} from 'react-bootstrap'
-import {createPantryItems} from '../api/index'
+import {createPantryItems, getPantryItems} from '../api/index'
 import AuthService from '../services/AuthService';
 
 class LandingForm extends Component{
@@ -31,21 +31,29 @@ class LandingForm extends Component{
         let { form } = this.state
         form.pantry_item.user_id = this.Auth.getUserId()
 
-        console.log(form);
-
         createPantryItems(form)
         .then(successPantry => {
-            console.log("CREATE SUCCESS!", successPantry);
+            this.props.history.replace('/recipes')
+
 
         })
 
 
 }
 
+    componentWillMount(){
+        let id = this.Auth.getUserId()
+        getPantryItems(id)
+        .then(resp => {
+          let array = [resp.proteins, resp.veggies, resp.grains, resp.seasonings, resp.other]
+          array = array.toString()
+          
+        })
+  }
+
 
 
     render() {
-        console.log(this.state.user_id)
         return(
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup>
