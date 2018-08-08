@@ -1,0 +1,17 @@
+.flex-container {
+  padding: 0;
+  margin: 10%;
+  list-style-type:square;
+
+  list-style: none;
+
+  display: flex;
+  flex-wrap : wrap;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex-basis: 20%;
+}

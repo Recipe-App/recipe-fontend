@@ -3,6 +3,7 @@ import { Image, Button } from 'react-bootstrap'
 import {deleteRecipe} from '../api/index'
 
 
+
 class SavedRecipes extends Component {
 
   constructor(props){
@@ -31,12 +32,11 @@ class SavedRecipes extends Component {
 
   render() {
       return(
-        <div>
+        <div className="flex-container">
         {
           this.props.saved.recipes.map((recipe,index) => {
           return(
-            <form>
-            <fieldset>
+            <div className="flex-item">
             <Image src={recipe.image} circle/>
             <h1> {recipe.label} </h1>
             <a href={recipe.url}>{recipe.url}</a>
@@ -52,8 +52,7 @@ class SavedRecipes extends Component {
             <Button id={`${recipe.id}`} bsStyle="danger" onClick={this.handleDelete.bind(this)}>Unsave</Button>
 
             <Button id={`${index}`} bsStyle="success" onClick={this.handleClick.bind(this)}>Add To Grocery List</Button><br/><br/><br/>
-            </fieldset>
-            </form>
+            </div>
           )
         })}}
         </div>
