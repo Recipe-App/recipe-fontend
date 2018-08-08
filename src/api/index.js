@@ -99,6 +99,24 @@ let createPantryItems= function(pantry) {
         })
 }
 
+let getPantryItems= function(userId) {
+
+    return fetch(`http://localhost:3001/pantry_items/${userId}`, {
+
+        // body: JSON.stringify(id),
+        // headers: {
+        //     'Content-Type': 'application/json'
+        //
+        // },
+        method: "GET"
+    })
+        .then((resp) => {
+            let json = resp.json()
+
+            return json
+        })
+}
+
 export {
 
   createUser,
@@ -107,6 +125,7 @@ export {
   getProfile,
   getSaved,
   deleteRecipe,
-  createPantryItems
+  createPantryItems,
+  getPantryItems
 
 }

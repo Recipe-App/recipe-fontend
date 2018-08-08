@@ -3,6 +3,7 @@ import NewRecipes from '../components/newRecipes'
 
 class Recipes extends Component {
     render() {
+
         return(
           <NewRecipes />
         )
