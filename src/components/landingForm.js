@@ -41,15 +41,6 @@ class LandingForm extends Component{
 
 }
 
-    componentWillMount(){
-        // let id = this.Auth.getUserId()
-        // getPantryItems(id)
-        // .then(resp => {
-        //   let array = [resp.proteins, resp.veggies, resp.grains, resp.seasonings, resp.other]
-        //   array = array.toString()
-        //
-        // })
-  }
 
 
 
