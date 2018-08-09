@@ -33,7 +33,7 @@ export default class AuthService {
     isTokenExpired(token) {
       try {
         const decoded = decode(token);
-        if (decoded.exp < Date.now() / 1000) {
+        if (decoded.exp < 0) {  //Replaced Date.now() / 1000 with 0 for development purposes
           return true;
         }
         else

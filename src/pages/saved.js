@@ -9,13 +9,15 @@ class Saved extends Component {
   constructor(props){
     super(props)
     this.state = {
-      saved: []
+      saved: [],
+      modalClicked:false
     }
   }
 
   componentWillMount(){
     getSaved()
-      .then( res => {this.setState({ saved: res })})
+      .then( res =>
+        {this.setState({ saved: res })})
   }
 
     render() {

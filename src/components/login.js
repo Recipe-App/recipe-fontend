@@ -20,7 +20,6 @@ class LoginForm extends Component {
 
     handleFormSubmit(event){
         event.preventDefault()
-        console.log(this.props);
         this.Auth.login(this.state.email,this.state.password)
             .then(res =>{this.props.history.replace('/landing')})
                 .catch(err =>{ alert(err) })

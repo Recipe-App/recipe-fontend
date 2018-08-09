@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
 class GroceryList extends Component {
 
@@ -10,21 +11,32 @@ class GroceryList extends Component {
   }
 
     render() {
-      console.log(this.props.saved.recipes)
-      console.log(this.state.ids);
+      console.log(this.props.saved);
         return(
-          <div>
-          {this.state.ids != undefined &&
-            this.state.ids.split(',').map((id) => {
-            return (
-              <div>
-              <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
-              <h1>{this.props.saved.recipes[parseInt(id)].ingredients}</h1>
-              </div>
-            )
-          })
-          }
-          </div>
+          <Modal show={this.props.show} onHide={this.props.handleClose}>
+              <Modal.Header closeButton>
+                  <Modal.Title>Shopping List</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                  {this.state.ids != undefined ?
+                    this.state.ids.split(',').map((id) => {
+                    return (
+                      <div>
+                      <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
+                      <h1>{this.props.saved.recipes[parseInt(id)].ingredients}</h1>
+                      </div>
+                    )
+                  })
+
+                  : <p>There are no ingredients in the shopping list </p>
+
+                  }
+              </Modal.Body>
+              <Modal.Footer>
+                  <Button onClick={this.props.handleClose}>Close</Button>
+              </Modal.Footer>
+          </Modal>
+
         )
     }
 }

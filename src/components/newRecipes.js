@@ -21,7 +21,7 @@ class NewRecipes extends Component {
     }
 
     componentWillMount(){
-      let data = ["mexican"]
+      let data = ["chinese"]
       let pantry = data.join(',')
       getRecipes(pantry)
           .then(obj => {
@@ -64,7 +64,7 @@ class NewRecipes extends Component {
           <div className="flex-item">
           <Image src={element.recipe.image} circle/><br/><br/>
           <h3>
-          <a href={element.recipe.url}>{element.recipe.label}</a></h3>
+          <a href={element.recipe.url} target="_blank">{element.recipe.label}</a></h3>
           <ul>{element.recipe.ingredients.map((elementTwo) =>{
             return(
             <div>
@@ -81,45 +81,3 @@ class NewRecipes extends Component {
 }
 
 export default NewRecipes
-
-
-
-
-
-
-// {this.state.apiResp.recipes.map((element,index)=>{
-//   return (
-//     <div className="modal">
-//     <div className="modal-dialog" role="document">
-//     <div className="modal-content">
-//     <div className="modal-header">
-//     <h5 className="modal-title">{element.recipe.label}</h5>
-//     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-//     <span aria-hidden="true">&times;</span>
-//     </button>
-//     </div>
-//     <div className="modal-body">
-//
-//     {element.recipe.ingredients.map((elementTwo) =>{
-//       return(
-//         <div>
-//         <p> {elementTwo.text} </p><br/>
-//         </div>
-//       )
-//     })
-//   }
-//
-//   <p>{element.recipe.url}</p>
-//   </div>
-//   <div className="modal-footer">
-//   <button type="button" onClick={this.handleClick.bind(this)} id={`${index}`} className="btn btn-primary">Save Recipe</button>
-//   <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-//   </div>
-//   </div>
-//   </div>
-// )
-// })}
-// </div>
-//
-// )
-// })}
