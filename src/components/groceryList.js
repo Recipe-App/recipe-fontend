@@ -17,19 +17,7 @@ class GroceryList extends Component {
                   <Modal.Title>Shopping List</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                  {this.state.ids != undefined ?
-                    this.state.ids.split(',').map((id) => {
-                    return (
-                      <div>
-                      <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
-                      <h1>{this.props.saved.recipes[parseInt(id)].ingredients}</h1>
-                      </div>
-                    )
-                  })
-
-                  : <p>There are no ingredients in the shopping list </p>
-
-                  }
+                  <p>Here are the ingredients!</p>
               </Modal.Body>
               <Modal.Footer>
                   <Button onClick={this.props.handleClose}>Close</Button>
@@ -41,3 +29,18 @@ class GroceryList extends Component {
 }
 
 export default GroceryList
+
+
+// {this.state.ids != undefined ?
+//   this.state.ids.split(',').map((id) => {
+//     return (
+//       <div>
+//       </div>
+//       <h1>{this.props.saved.recipes[parseInt(id)].label}</h1>
+//       <h1>{this.props.saved.recipes[parseInt(id)].ingredients}</h1>
+//     )
+//   })
+//
+//   : <p>There are no ingredients in the shopping list </p>
+//
+// }
