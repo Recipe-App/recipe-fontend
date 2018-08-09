@@ -1,0 +1,31 @@
+.flex-container {
+  padding: 0;
+  margin: 10%;
+  list-style-type:square;
+
+  list-style: none;
+
+  display: flex;
+  flex-wrap : wrap;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex-basis: 30%;
+}
+
+.header {
+  background-color: white;
+  position: fixed;
+  height: 50px;
+  width: 100%;
+}
+
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}

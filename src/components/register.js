@@ -39,13 +39,9 @@ class RegisterForm extends Component {
     .then(successUser => {
         console.log("SUCCESS! New user: ", successUser);
     })
-    // .then(successUser =>{
-    //   this.props.history.replace('/apartments')
-    // })
-    //
     // this.state.Auth.login(this.state.user.email,this.state.user.password)
     // .then(res =>{
-    //   this.props.history.replace('/apartments')
+    //   this.props.history.replace('/')
     // })
     }
 

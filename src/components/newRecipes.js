@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { getRecipes, saveRecipes, getPantryItems } from '../api/index'
+import { getRecipes, saveRecipes } from '../api/index'
 import { Image, Button } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
+import '../App.css'
 // require('dotenv').config()
 
 class NewRecipes extends Component {
@@ -20,24 +21,14 @@ class NewRecipes extends Component {
     }
 
     componentWillMount(){
-        let id = this.Auth.getUserId()
-        let array = []
-        getPantryItems(id)
-        .then(resp => {
-        array = [resp.proteins, resp.veggies]
-        array = array.join()
-
-        getRecipes(array)
-           .then(obj => {
-             let { apiResp } = this.state
-             apiResp.recipes = obj
-             this.setState({ apiResp: apiResp })
-           })
-
-        })
-
-
-
+      let data = ["chinese"]
+      let pantry = data.join(',')
+      getRecipes(pantry)
+          .then(obj => {
+            let { apiResp } = this.state
+            apiResp.recipes = obj
+            this.setState({ apiResp: apiResp })
+          })
     }
 
     processRecipe(rawRecipe){  //It parses the raw recipe object to send to db
@@ -64,29 +55,27 @@ class NewRecipes extends Component {
         saveRecipes(toSave)
     }
 
+
     render() {
         return(
-          <div>
-          {this.state.apiResp.recipes.map((element, index) => {
+          <div className="flex-container">
+          {this.state.apiResp.recipes.map((element,index)=>{
+           return (
+          <div className="flex-item">
+          <Image src={element.recipe.image} circle/><br/><br/>
+          <h3>
+          <a href={element.recipe.url} target="_blank">{element.recipe.label}</a></h3>
+          <ul>{element.recipe.ingredients.map((elementTwo) =>{
             return(
-              <form>
-              <fieldset>
-              <Image src={element.recipe.image} circle/>
-              <h1> {element.recipe.label} </h1>
-              <a href={element.recipe.url}>{element.recipe.url}</a>
-              {element.recipe.ingredients.map((elementTwo) =>{
-                return(
-                  <div>
-                  <h1> {elementTwo.text} </h1><br/>
-                  </div>
-                )
-              })}
-              <Button id={`${index}`} bsStyle="danger" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/>
-              </fieldset>
-              </form>
+            <div>
+              <li> {elementTwo.text} </li><br/>
+            </div>
             )
-          })}
+          })}</ul>
+          <Button id={`${index}`} bsStyle="danger" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/><br/><br/>
           </div>
+        )})}
+        </div>
         )
     }
 }
