@@ -39,7 +39,7 @@ class RegisterForm extends Component {
     .then(successUser => {
         console.log("SUCCESS! New user: ", successUser);
     })
-    //TODO
+    //TODO 
     // this.state.Auth.login(this.state.user.email,this.state.user.password)
     // .then(res =>{
     //   this.props.history.replace('/')

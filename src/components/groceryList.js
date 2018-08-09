@@ -10,6 +10,7 @@ class GroceryList extends Component {
     }
   }
 
+//TODO
     // processIngredients(array) {  Fix later
     //     array.map((element, index, array) => {
     //       console.log(array);
