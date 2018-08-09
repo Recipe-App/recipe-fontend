@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavItem, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../services/AuthService'
+import '../App.css'
 
 const Auth = new AuthService()
 
@@ -14,7 +15,7 @@ class Header extends Component {
 
     render() {
         return (
-            <Navbar >
+            <Navbar className="header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
