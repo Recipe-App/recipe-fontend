@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavItem, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../services/AuthService'
+import '../App.css'
 
 const Auth = new AuthService()
 
@@ -14,7 +15,7 @@ class Header extends Component {
 
     render() {
         return (
-            <Navbar >
+            <Navbar className="header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
@@ -26,17 +27,20 @@ class Header extends Component {
 
 
                         ? <Nav>
-
-                              <NavItem href="/"> Pantry</NavItem>
-
-                              <NavItem onClick={this.handleLogout} href="/login">
-                                Logout
+                              <NavItem href="/">
+                              Pantry
                               </NavItem>
-                              <NavItem href="/profile">
-                                Profile
+                              <NavItem href="/recipes">
+                              New Recipes
                               </NavItem>
                               <NavItem href="/saved">
                                 Saved
+                              </NavItem>
+                              <NavItem href="/profile">
+                              Profile
+                              </NavItem>
+                              <NavItem onClick={this.handleLogout} href="/login">
+                              Logout
                               </NavItem>
 
                           </Nav>

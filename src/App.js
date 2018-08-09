@@ -12,7 +12,7 @@ import Profile from './pages/profile'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="position">
         <Router>
         <div>
         <Header />

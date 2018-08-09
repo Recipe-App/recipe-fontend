@@ -19,6 +19,7 @@
 .header {
   background-color: white;
   position: fixed;
+  top: 0;
   height: 50px;
   width: 100%;
 }
@@ -28,4 +29,18 @@
 }
 .modal-container .modal, .modal-container .modal-backdrop {
   position: absolute;
+}
+
+.position{
+  margin-top: 8%
+}
+
+.button{
+  color: white;
+  font-weight: bold;
+  position:fixed;
+  top: 10px;
+  right: 20px;
+  width: 200px;
+  background-color: red;
 }

@@ -16,7 +16,6 @@ class SavedRecipes extends Component {
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      ids: [],
       show: false
     }
   }
@@ -31,11 +30,14 @@ class SavedRecipes extends Component {
 
   handleClick(event){
     let id = parseInt(event.target.id)
-    let { ids } = this.state
+    console.log(id);
+    let ids = sessionStorage.getItem("ids").split(',')
 
-    !ids.includes(id) && ids.push(id)
+    !ids.includes(String(id)) && ids.push(id)
 
-    sessionStorage.setItem("ids", ids)
+    let filtered_ids = ids.filter(id => id != "placeholder")
+
+    sessionStorage.setItem("ids", filtered_ids)
   }
 
   handleDelete(event){
@@ -47,14 +49,13 @@ class SavedRecipes extends Component {
   }
 
   render() {
-    console.log(this.state.show);
       return(
 
         <div className="flex-container">
 
         <GroceryList saved={this.props.saved} show={this.state.show} handleClose={this.handleClose}/>
 
-        <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
+        <Button className="button" bsSize="large" onClick={this.handleShow}>
           See Grocery List
         </Button>
 
@@ -65,12 +66,12 @@ class SavedRecipes extends Component {
                   <div className="flex-item">
                       <Image src={recipe.image} circle/><br/><br/>
                       <h3>
-                      <a href={recipe.url}>{recipe.label}</a></h3>
+                      <a href={recipe.url} target="_blank">{recipe.label}</a></h3>
                       <ul>
-                          {recipe.ingredients.split('////').map((ingredient) =>{
+                          {recipe.ingredients.split(',').map((ingredient) =>{
                               return(
                               <div>
-                                <li> {ingredient} </li><br/>
+                                <li> {ingredient} </li>
                               </div>
                               )
                                 }

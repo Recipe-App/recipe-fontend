@@ -21,7 +21,6 @@ class Saved extends Component {
   }
 
     render() {
-      console.log("This is the state for Saved",this.state.saved);
         return(
           <div>
           {this.state.saved.length != 0 &&
