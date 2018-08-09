@@ -46,12 +46,14 @@ componentWillMount(){
     getPantryItems(id)
     .then(resp => {
         let { form } = this.state
-        form.pantry_item.proteins = resp.proteins
-        form.pantry_item.veggies = resp.veggies
-        form.pantry_item.grains = resp.grains
-        form.pantry_item.seasonings = resp.seasonings
-        form.pantry_item.other = resp.other
-        this.setState({ form })
+        if (resp !== null) {
+            form.pantry_item.proteins = resp.proteins
+            form.pantry_item.veggies = resp.veggies
+            form.pantry_item.grains = resp.grains
+            form.pantry_item.seasonings = resp.seasonings
+            form.pantry_item.other = resp.other
+            this.setState({ form })
+        }
     })
 }
 
