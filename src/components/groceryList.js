@@ -11,7 +11,6 @@ class GroceryList extends Component {
   }
 
     render() {
-      console.log(this.props.saved);
         return(
           <Modal show={this.props.show} onHide={this.props.handleClose}>
               <Modal.Header closeButton>
