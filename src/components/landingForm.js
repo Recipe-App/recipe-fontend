@@ -58,7 +58,7 @@ componentWillMount(){
 
     render() {
         return(
-                <form onSubmit={this.handleSubmit.bind(this)}>
+                <form  onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup>
                         <ControlLabel>Protein</ControlLabel>
                             <FormControl

@@ -26,6 +26,9 @@ class Header extends Component {
 
 
                         ? <Nav>
+
+                              <NavItem href="/"> Pantry</NavItem>
+
                               <NavItem onClick={this.handleLogout} href="/login">
                                 Logout
                               </NavItem>
