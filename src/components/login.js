@@ -21,7 +21,7 @@ class LoginForm extends Component {
     handleFormSubmit(event){
         event.preventDefault()
         this.Auth.login(this.state.email,this.state.password)
-            .then(res =>{this.props.history.replace('/landing')})
+            .then(res =>{this.props.history.replace('/')})
                 .catch(err =>{ alert(err) })
     }
 

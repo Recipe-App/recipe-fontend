@@ -37,7 +37,8 @@ class NewRecipes extends Component {
 
       toSave.user_id = this.Auth.getUserId()
       toSave.label = recipe.label
-      toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join(',')
+      toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join()
+      console.log(toSave.ingredients);
       toSave.url = recipe.url
       toSave.image = recipe.image
 
