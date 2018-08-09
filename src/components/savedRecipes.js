@@ -67,7 +67,7 @@ class SavedRecipes extends Component {
                       <h3>
                       <a href={recipe.url}>{recipe.label}</a></h3>
                       <ul>
-                          {recipe.ingredients.split(',').map((ingredient) =>{
+                          {recipe.ingredients.split('////').map((ingredient) =>{
                               return(
                               <div>
                                 <li> {ingredient} </li><br/>

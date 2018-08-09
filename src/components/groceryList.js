@@ -10,10 +10,22 @@ class GroceryList extends Component {
     }
   }
 
+    // processIngredients(array) {  Fix later
+    //     array.map((element, index, array) => {
+    //       console.log(array);
+    //       if (array[index+1] != undefined && array[index+1][0] == ' ') {
+    //           return element + array[index + 1]
+    //       } else {
+    //         return element
+    //       }
+    //     })
+    // }
+
     render() {
       console.log("This is the saved recipes array in GroceryList", this.props.saved);
         return(
-          <Modal show={this.props.show} onHide={this.props.handleClose}>
+          <Modal show={this.props.show} onHide={this.props.handleClose}         bsSize="small"
+>
               <Modal.Header closeButton>
                   <Modal.Title>Shopping List</Modal.Title>
               </Modal.Header>
@@ -21,10 +33,18 @@ class GroceryList extends Component {
               {this.state.ids != undefined ?
                 this.state.ids.split(',').map((id) => {
                   let index = parseInt(id)
+                  let label = this.props.saved[index].label
+                  let ingredients =   this.props.saved[index].ingredients.split(',')
                   return (
                     <div>
-                    <h1>{this.props.saved[index].label}</h1>
-                    <h1>{this.props.saved[index].ingredients}</h1>
+                    <h6>{label}</h6>
+                    <ul>
+                    {ingredients.map((item) => {
+                      return (
+                        <li>{item}</li>
+                      )
+                    })}
+                    </ul>
                     </div>
                   )
                 })
