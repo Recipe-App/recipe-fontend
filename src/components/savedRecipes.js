@@ -31,7 +31,7 @@ class SavedRecipes extends Component {
 
   render() {
       return(
-        <div>
+        <div className="SavedRecipes">
         {
           this.props.saved.recipes.map((recipe,index) => {
           return(
@@ -55,7 +55,7 @@ class SavedRecipes extends Component {
             </fieldset>
             </form>
           )
-        })}}
+        })}
         </div>
       )
   }

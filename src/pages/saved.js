@@ -26,8 +26,9 @@ class Saved extends Component {
             <div>
             <SavedRecipes saved={this.state.saved}/>
             <GroceryList saved={this.state.saved}/>
+
             </div>
-          }
+        }
           </div>
         )
     }

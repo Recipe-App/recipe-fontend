@@ -13,18 +13,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Router>
-        <div>
-        <Header />
-            <div>
-                <Route exact path='/' component={Landing} />
-                <Route path='/login' component={Login} />
-                <Route path='/register' component={Register} />
-                <Route path='/profile' component={Profile} />
-                <Route path='/recipes' component={Recipes} />
-                <Route path='/saved' component={Saved} />
-            </div>
-            </div>
+      <Router>
+      <div>
+      <Header />
+          <div>
+              <Route exact path='/' component={Landing} />
+              <Route path='/login' component={Login} />
+              <Route path='/register' component={Register} />
+              <Route path='/profile' component={Profile} />
+              <Route path='/recipes' component={Recipes} />
+              <Route path='/saved' component={Saved} />
+          </div>
+          </div>
         </Router>
       </div>
     );

@@ -22,7 +22,7 @@ class LoginForm extends Component {
         event.preventDefault()
         console.log(this.props);
         this.Auth.login(this.state.email,this.state.password)
-            .then(res =>{this.props.history.replace('/landing')})
+            .then(res =>{this.props.history.replace('/')})
                 .catch(err =>{ alert(err) })
     }
 
@@ -31,6 +31,7 @@ class LoginForm extends Component {
             <form onSubmit={this.handleFormSubmit.bind(this)}>
             <h1>Welcome to the Login Page!</h1>
                 <FormGroup>
+                
                     <ControlLabel>Email</ControlLabel>
                     <FormControl
                         type='text'

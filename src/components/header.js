@@ -4,47 +4,43 @@ import { Link } from 'react-router-dom'
 import AuthService from '../services/AuthService'
 
 const Auth = new AuthService()
-
 class Header extends Component {
-
     handleLogout(){
           Auth.logout()
     }
 
+
     render() {
         return (
-            <Navbar>
+            <div className="header">
+            <Navbar className = "header navbar-fixed-top">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
                     </Navbar.Brand>
                 </Navbar.Header>
+                <Nav>
+                    {Auth.loggedIn()
+                        ? <Nav>
+                              <NavItem onClick={this.handleLogout} href="/login">
+                                Logout
+                              </NavItem>
+                              <NavItem href="/profile">
+                                Profile
+                              </NavItem>
+                              <NavItem href="/saved">
+                                Saved Recipes
+                              </NavItem>
+                          </Nav>
+                        : <NavItem>
+                            <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+                          </NavItem>
+                    }
+                </Nav>
+            </Navbar>
 
-        <Nav>
-            {Auth.loggedIn()
-
-                ? <div>
-                  <NavItem onClick={this.handleLogout}>
-                    <Link to="/login">Logout</Link>
-                  </NavItem>
-
-                  <NavItem>
-                    <Link to="/profile">Profile</Link>
-                  </NavItem>
-
-                  <NavItem>
-                    <Link to="/saved">Saved</Link>
-                  </NavItem>
-                  </div>
-
-                : <NavItem>
-                    <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
-                  </NavItem>
-            }
-        </Nav>
-        </Navbar>
+            </div>
     );
   }
 }
-
 export default Header;
