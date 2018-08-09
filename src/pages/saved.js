@@ -26,8 +26,8 @@ class Saved extends Component {
           <div>
           {this.state.saved.length != 0 &&
             <div>
-            <SavedRecipes saved={this.state.saved}/>
-            <GroceryList saved={this.state.saved}/>
+            <SavedRecipes saved={this.state.saved.recipes}/>
+            <GroceryList saved={this.state.saved.recipes}/>
             </div>
           }
           </div>

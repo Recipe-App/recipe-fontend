@@ -52,21 +52,7 @@ class SavedRecipes extends Component {
 
         <div className="flex-container">
 
-        <Modal className="modal" show={this.state.show} onHide={this.handleClose} >
-        <Modal.Header closeButton>
-        <Modal.Title>Shopping List</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <p>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-        ac consectetur ac, vestibulum at eros.
-        </p>
-        </Modal.Body>
-        <Modal.Footer>
-        <Button onClick={this.handleClose}>Close</Button>
-        </Modal.Footer>
-        </Modal>
+        <GroceryList saved={this.props.saved} show={this.state.show} handleClose={this.handleClose}/>
 
         <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
           See Grocery List
@@ -74,7 +60,7 @@ class SavedRecipes extends Component {
 
 
 
-            {this.props.saved.recipes.map((recipe,index)=>{
+            {this.props.saved.map((recipe,index)=>{
                 return (
                   <div className="flex-item">
                       <Image src={recipe.image} circle/><br/><br/>
@@ -104,3 +90,20 @@ class SavedRecipes extends Component {
 }
 
 export default SavedRecipes
+
+
+// <Modal className="modal" show={this.state.show} onHide={this.handleClose} >
+// <Modal.Header closeButton>
+// <Modal.Title>Shopping List</Modal.Title>
+// </Modal.Header>
+// <Modal.Body>
+// <p>
+// Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+// dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+// ac consectetur ac, vestibulum at eros.
+// </p>
+// </Modal.Body>
+// <Modal.Footer>
+// <Button onClick={this.handleClose}>Close</Button>
+// </Modal.Footer>
+// </Modal>
