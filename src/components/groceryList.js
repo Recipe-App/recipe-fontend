@@ -3,13 +3,6 @@ import { Modal, Button } from 'react-bootstrap'
 
 class GroceryList extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      ids: !null && sessionStorage.getItem('ids')
-    }
-  }
-
 //TODO
     // processIngredients(array) {  Fix later
     //     array.map((element, index, array) => {
@@ -21,9 +14,10 @@ class GroceryList extends Component {
     //       }
     //     })
     // }
+  
 
     render() {
-      console.log("This is the saved recipes array in GroceryList", this.props.saved);
+        let ids = sessionStorage.getItem('ids')
         return(
           <Modal show={this.props.show} onHide={this.props.handleClose}         bsSize="small"
 >
@@ -31,8 +25,9 @@ class GroceryList extends Component {
                   <Modal.Title>Shopping List</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-              {this.state.ids != undefined ?
-                this.state.ids.split(',').map((id) => {
+              {
+                ids != ["placeholder"] ?
+                  ids.split(',').map((id) => {
                   let index = parseInt(id)
                   let label = this.props.saved[index].label
                   let ingredients =   this.props.saved[index].ingredients.split(',')
@@ -48,7 +43,7 @@ class GroceryList extends Component {
                     </ul>
                     </div>
                   )
-                })
+                  })
 
                 : <p>There are no ingredients in the shopping list </p>
 
@@ -56,7 +51,7 @@ class GroceryList extends Component {
 
               </Modal.Body>
               <Modal.Footer>
-                  <Button onClick={this.props.handleClose}>Close</Button>
+                  <Button onClick={this.handleSubmit}>Text Me</Button>
               </Modal.Footer>
           </Modal>
 
