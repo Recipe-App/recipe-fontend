@@ -11,9 +11,10 @@ class Header extends Component {
           Auth.logout()
     }
 
+
     render() {
         return (
-            <Navbar className = "header navbar-fixed-top">
+            <Navbar >
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
