@@ -50,7 +50,7 @@ class GroceryList extends Component {
 
               </Modal.Body>
               <Modal.Footer>
-                  <Button onClick={this.props.handleClose}>Close</Button>
+                  <Button onClick={this.handleSubmit}>Text Me</Button>
               </Modal.Footer>
           </Modal>
 
