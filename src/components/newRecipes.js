@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getRecipes, saveRecipes } from '../api/index'
+import { getRecipes, saveRecipes, getPantryItems } from '../api/index'
 import { Image, Button } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
 import '../App.css'
@@ -21,6 +21,7 @@ class NewRecipes extends Component {
     }
 
     componentWillMount(){
+<<<<<<< HEAD
       let data = ["chinese"]
       let pantry = data.join(',')
       getRecipes(pantry)
@@ -29,6 +30,26 @@ class NewRecipes extends Component {
             apiResp.recipes = obj
             this.setState({ apiResp: apiResp })
           })
+=======
+        let id = this.Auth.getUserId()
+        let array = []
+        getPantryItems(id)
+        .then(resp => {
+        array = [resp.proteins, resp.veggies]
+        array = array.join()
+
+        getRecipes(array)
+           .then(obj => {
+             let { apiResp } = this.state
+             apiResp.recipes = obj
+             this.setState({ apiResp: apiResp })
+           })
+
+        })
+
+
+
+>>>>>>> master
     }
 
     processRecipe(rawRecipe){  //It parses the raw recipe object to send to db

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-
+import LandingForm from '../components/landingForm'
 class Landing extends Component {
     render() {
+
         return(
-            <h1>Landing Page</h1>
+            <LandingForm history = {this.props.history}/>
         )
     }
 }
