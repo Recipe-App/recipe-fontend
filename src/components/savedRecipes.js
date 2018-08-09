@@ -55,7 +55,7 @@ class SavedRecipes extends Component {
 
         <GroceryList saved={this.props.saved} show={this.state.show} handleClose={this.handleClose}/>
 
-        <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
+        <Button className="button" bsSize="large" onClick={this.handleShow}>
           See Grocery List
         </Button>
 
