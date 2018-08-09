@@ -1,7 +1,17 @@
 import AuthService from '../services/AuthService'
+
+
 const Auth = new AuthService()
 
-const userId = Auth.getUserId()
+
+let checkIfToken = () => {
+    if (Auth.loggedIn()){
+         let userId = Auth.getUserId()
+         return userId
+}
+
+}
+
 
 //These are all of our create methods
 let createUser = (user) => {
@@ -55,11 +65,11 @@ let getRecipes = (pantry) => {
 }
 
 let getProfile = () => {
-  return Auth.fetch(`http://localhost:3001/users/${userId}`)
+  return Auth.fetch(`http://localhost:3001/users/${checkIfToken()}`)
 }
 
 let getSaved = () => {
-  return Auth.fetch(`http://localhost:3001/saved_recipes/${userId}`)
+  return Auth.fetch(`http://localhost:3001/saved_recipes/${checkIfToken()}`)
 }
 
 //These are all of our delete methods
