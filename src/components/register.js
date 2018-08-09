@@ -45,9 +45,13 @@ class RegisterForm extends Component {
     // })
     }
 
+    styleIt = {
+        margin: '100px'
+    }
+
     render(){
         return(
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form style = {this.styleIt} onSubmit={this.handleSubmit.bind(this)}>
                 <FormGroup>
                         <ControlLabel>First Name</ControlLabel>
                         <FormControl
