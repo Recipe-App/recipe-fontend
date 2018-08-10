@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { getRecipes, saveRecipes, getPantryItems } from '../api/index'
 import { Image, Button } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
+import ButtonFunction from './button'
 import '../App.css'
 // require('dotenv').config()
 
@@ -16,7 +17,8 @@ class NewRecipes extends Component {
             },
             saved: {
               recipes:[]
-            }
+          },
+            switchs: ['danger', 'warning']
         }
     }
 
@@ -59,12 +61,16 @@ class NewRecipes extends Component {
         let { saved } = this.state
         let { recipes } = this.state.apiResp
 
+
+
+
         let toSave = {recipe: this.processRecipe(recipes[id])}  //This method works
         saveRecipes(toSave)
     }
 
 
     render() {
+        console.log(this.state.switchs);
         return(
           <div className="flex-container">
           {this.state.apiResp.recipes.map((element,index)=>{
@@ -80,7 +86,7 @@ class NewRecipes extends Component {
             </div>
             )
           })}</ul>
-          <Button id={`${index}`} bsStyle="danger" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/><br/><br/>
+          <ButtonFunction id={`${index}`} onClick= {this.handleClick.bind(this)} style='warning'/>
           </div>
         )})}
         </div>
