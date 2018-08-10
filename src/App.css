@@ -17,26 +17,29 @@
   align-self: auto;
 }
 
+.image{
+  padding: 0;
+}
+
 .header {
   background-color: white;
   position: fixed;
+  z-index:999;
   top: 0;
   height: 50px;
   width: 100%;
 }
 
-.modal-container {
-  position: relative;
-}
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
-}
-
 .position{
-  margin-top: 8%
+  margin-top: 8%;
 }
 
 .button{
+  z-index:auto;
+}
+
+.list_style{
+  z-index:1000;
   color: white;
   font-weight: bold;
   position:fixed;

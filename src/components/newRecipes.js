@@ -83,13 +83,13 @@ class NewRecipes extends Component {
           <div className="flex-container">
           {this.state.apiResp.recipes.map((element,index)=>{
            return (
-          <Panel className="flex-item" expanded={this.state.open[index]}>
+          <Panel className="flex-item" defaultExpanded>
                <Panel.Heading>
-                    <Image id={`${index}`} src={element.recipe.image} onClick={this.togglePanel.bind(this)}/><br/><br/>
+                    <Image src={element.recipe.image} className="image"/><br/>
                </Panel.Heading>
                <Panel.Collapse>
                <Panel.Body collapsible>
-               <Button id={`${index}`} bsStyle="danger" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/><br/>
+               <Button id={`${index}`} bsStyle="danger" className="button" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/><br/>
                     <h3>
                         <a className="title" href={element.recipe.url} target="_blank">{element.recipe.label}</a>
                     </h3>
