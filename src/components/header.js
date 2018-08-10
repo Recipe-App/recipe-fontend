@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavItem, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../services/AuthService'
+import '../App.css'
 
 const Auth = new AuthService()
 class Header extends Component {
@@ -12,34 +13,43 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="header">
-            <Navbar className = "header navbar-fixed-top">
+            <Navbar className = "header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
                     </Navbar.Brand>
                 </Navbar.Header>
+
                 <Nav>
                     {Auth.loggedIn()
+
+
                         ? <Nav>
-                              <NavItem onClick={this.handleLogout} href="/login">
-                                Logout
+                              <NavItem href="/">
+                              Pantry
                               </NavItem>
-                              <NavItem href="/profile">
-                                Profile
+                              <NavItem href="/recipes">
+                              New Recipes
                               </NavItem>
                               <NavItem href="/saved">
-                                Saved Recipes
+                                Saved
                               </NavItem>
+                              <NavItem href="/profile">
+                              Profile
+                              </NavItem>
+                              <NavItem onClick={this.handleLogout} href="/login">
+                              Logout
+                              </NavItem>
+
                           </Nav>
+
                         : <NavItem>
                             <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
                           </NavItem>
+
                     }
                 </Nav>
             </Navbar>
-
-            </div>
     );
   }
 }

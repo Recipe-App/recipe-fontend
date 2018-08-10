@@ -4,7 +4,7 @@ import RegisterForm from '../components/register'
 class Register extends Component {
     render() {
         return(
-            <RegisterForm />
+            <RegisterForm history={this.props.history}/>
         )
     }
 }

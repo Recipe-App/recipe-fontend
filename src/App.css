@@ -1,0 +1,54 @@
+.flex-container {
+  padding: 0;
+  margin: 10%;
+  list-style-type:square;
+
+  list-style: none;
+
+  display: flex;
+  flex-wrap : wrap;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex-basis: 20%;
+  align-self: auto;
+}
+
+.image{
+  padding: 0;
+}
+
+.header {
+  background-color: white;
+  position: fixed;
+  z-index:999;
+  top: 0;
+  height: 50px;
+  width: 100%;
+}
+
+.position{
+  margin-top: 8%;
+}
+
+.button{
+  z-index:auto;
+}
+
+.list_style{
+  z-index:1000;
+  color: white;
+  font-weight: bold;
+  position:fixed;
+  top: 10px;
+  right: 20px;
+  width: 200px;
+  background-color: red;
+}
+
+.title{
+  color:black;
+}

@@ -40,8 +40,22 @@ class LandingForm extends Component{
 
 
 }
-
-
+componentWillMount(){
+    let id = this.Auth.getUserId()
+    let array = []
+    getPantryItems(id)
+    .then(resp => {
+        let { form } = this.state
+        if (resp !== null) {
+            form.pantry_item.proteins = resp.proteins
+            form.pantry_item.veggies = resp.veggies
+            form.pantry_item.grains = resp.grains
+            form.pantry_item.seasonings = resp.seasonings
+            form.pantry_item.other = resp.other
+            this.setState({ form })
+        }
+    })
+}
 
 
     render() {
@@ -52,40 +66,35 @@ class LandingForm extends Component{
                             <FormControl
                                 type='text'
                                 name='proteins'
-                                value={this.state.value}
-                                placeholder="Enter Protein"
+                                    value={this.state.form.pantry_item.proteins}
                                 onChange={this.handleChange.bind(this)}/>
 
                         <ControlLabel>Vegetables</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='veggies'
-                                value={this.state.value}
-                                placeholder="Enter Vegetables"
+                                value={this.state.form.pantry_item.veggies}
                                 onChange={this.handleChange.bind(this)}/>
 
                         <ControlLabel>Grains</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='grains'
-                                value={this.state.value}
-                                placeholder="Enter Grains"
+                                value={this.state.form.pantry_item.grains}
                                 onChange={this.handleChange.bind(this)}/>
 
                         <ControlLabel>Spices</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='seasonings'
-                                value={this.state.value}
-                                placeholder="Enter Spices"
+                                value={this.state.form.pantry_item.seasonings}
                                 onChange={this.handleChange.bind(this)}/>
 
                         <ControlLabel>Other</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='other'
-                                value={this.state.value}
-                                placeholder="Other"
+                                value={this.state.form.pantry_item.other}
                                 onChange={this.handleChange.bind(this)}/>
 
 

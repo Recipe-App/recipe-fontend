@@ -8,7 +8,6 @@ export default class AuthService {
     }
 
     login(email, password) {
-        console.log(password,email);
       return this.fetch(`${this.domain}/user_token`, { // Our backend endpoint
         method: 'POST',
         body: JSON.stringify({
@@ -33,7 +32,7 @@ export default class AuthService {
     isTokenExpired(token) {
       try {
         const decoded = decode(token);
-        if (decoded.exp <0) { //will never log someone out 
+        if (decoded.exp < 0) {  //Replaced Date.now() / 1000 with 0 for development purposes
           return true;
         }
         else

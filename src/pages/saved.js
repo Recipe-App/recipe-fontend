@@ -9,24 +9,24 @@ class Saved extends Component {
   constructor(props){
     super(props)
     this.state = {
-      saved: []
+      saved: [],
+      modalClicked:false
     }
   }
 
   componentWillMount(){
     getSaved()
-      .then( res => {this.setState({ saved: res })})
+      .then( res =>
+        {this.setState({ saved: res })})
   }
 
     render() {
-      console.log("This is the state for Saved",this.state.saved);
         return(
           <div>
           {this.state.saved.length != 0 &&
             <div>
-            <SavedRecipes saved={this.state.saved}/>
-            <GroceryList saved={this.state.saved}/>
-
+              <SavedRecipes saved={this.state.saved.recipes}/>
+              <GroceryList saved={this.state.saved.recipes}/>
             </div>
         }
           </div>
