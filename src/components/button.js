@@ -14,7 +14,7 @@ class ButtonFunction extends Component {
 render(){
     return(
         <div>
-        <Button id={this.props.id} bsStyle={this.props.style} onClick={this.props.onClick}>Save Recipe</Button><br/><br/><br/>
+        <Button id={this.props.id} bsStyle={this.props.style} onClick={this.props.onClick}>{this.props.text}</Button><br/><br/><br/>
         </div>
     )
 }}

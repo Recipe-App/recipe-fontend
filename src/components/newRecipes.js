@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getRecipes, saveRecipes, getPantryItems } from '../api/index'
+import { getRecipes, saveRecipes, getPantryItems, deleteRecipe} from '../api/index'
 import { Image, Button } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
 import ButtonFunction from './button'
@@ -18,8 +18,9 @@ class NewRecipes extends Component {
             saved: {
               recipes:[]
           },
-            switchs: ['danger', 'warning']
-        }
+            switchs:{
+                array: [true,true,true,true,true,true,true,true,true,true]
+        }}
     }
 
     componentWillMount(){
@@ -47,11 +48,19 @@ class NewRecipes extends Component {
       toSave.user_id = this.Auth.getUserId()
       toSave.label = recipe.label
       toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join()
-      console.log(toSave.ingredients);
       toSave.url = recipe.url
       toSave.image = recipe.image
 
       return toSave
+    }
+
+    styleChange(x){
+        let { switchs } = this.state
+        switchs.array[x] = !switchs.array[x] ? true : false
+        this.setState({ switchs })
+
+
+
     }
 
 
@@ -60,17 +69,20 @@ class NewRecipes extends Component {
         let id = event.target.id
         let { saved } = this.state
         let { recipes } = this.state.apiResp
-
-
-
-
+        let { switchs } = this.state
+        this.styleChange(id) // this changes the button style
         let toSave = {recipe: this.processRecipe(recipes[id])}  //This method works
-        saveRecipes(toSave)
+
+        !switchs.array[id] ? saveRecipes(toSave) : deleteRecipe(id)
+
+        // saveRecipes(toSave) // this saves a unique recipe based on Id
     }
 
 
+
+
+
     render() {
-        console.log(this.state.switchs);
         return(
           <div className="flex-container">
           {this.state.apiResp.recipes.map((element,index)=>{
@@ -86,7 +98,7 @@ class NewRecipes extends Component {
             </div>
             )
           })}</ul>
-          <ButtonFunction id={`${index}`} onClick= {this.handleClick.bind(this)} style='warning'/>
+          <ButtonFunction id={`${index}`} onClick= {this.handleClick.bind(this)} style={this.state.switchs.array[index]? "danger" : "warning"} text={this.state.switchs.array[index]? "Save Recipe" : "Undo"}/>
           </div>
         )})}
         </div>
