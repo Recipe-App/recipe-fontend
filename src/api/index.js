@@ -113,11 +113,7 @@ let getPantryItems= function(userId) {
 
     return fetch(`http://localhost:3001/pantry_items/${userId}`, {
 
-        // body: JSON.stringify(id),
-        // headers: {
-        //     'Content-Type': 'application/json'
-        //
-        // },
+
         method: "GET"
     })
         .then((resp) => {

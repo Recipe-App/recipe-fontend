@@ -5,9 +5,7 @@ import AuthService from '../services/AuthService'
 import '../App.css'
 
 const Auth = new AuthService()
-
 class Header extends Component {
-
     handleLogout(){
           Auth.logout()
     }
@@ -15,7 +13,7 @@ class Header extends Component {
 
     render() {
         return (
-            <Navbar className="header">
+            <Navbar className = "header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'>Recipe App</Link>
@@ -55,5 +53,4 @@ class Header extends Component {
     );
   }
 }
-
 export default Header;

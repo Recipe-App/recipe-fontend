@@ -4,7 +4,9 @@ class Landing extends Component {
     render() {
 
         return(
+            <div>
             <LandingForm history = {this.props.history}/>
+            </div>
         )
     }
 }
