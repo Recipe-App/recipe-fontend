@@ -13,33 +13,29 @@
 }
 
 .flex-item {
-  flex-basis: 20%;
-  align-self: auto;
-}
-
-.image{
-  padding: 0;
+  flex-basis: 30%;
 }
 
 .header {
   background-color: white;
   position: fixed;
-  z-index:999;
   top: 0;
   height: 50px;
   width: 100%;
 }
 
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
 .position{
-  margin-top: 8%;
+  margin-top: 8%
 }
 
 .button{
-  z-index:auto;
-}
-
-.list_style{
-  z-index:1000;
   color: white;
   font-weight: bold;
   position:fixed;
@@ -49,6 +45,34 @@
   background-color: red;
 }
 
-.title{
-  color:black;
+.ProfileInfo  {
+    position: center;
+    text-align: center;
+
+
+}
+.move{
+
+    position: center;
+}
+
+.img {
+
+}
+.responsive {
+    width: 100px;
+    height: 100px;
+    margin-left: 525px;
+    max-width: 10%;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.infocontainer{
+    position: relative;
+    text-align: center;
+    
+
 }

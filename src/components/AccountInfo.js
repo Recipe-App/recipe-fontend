@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { getProfile } from '../api/index'
-import ProfileImage from '../components/profileimage'
-
-
+import { ControlLabel, Button, FormControl, FormGroup } from 'react-bootstrap'
 
 
 class AccountInfo extends Component {
@@ -17,63 +15,113 @@ class AccountInfo extends Component {
     getProfile()
       .then( res => {this.setState({ user: res })
     })
+
   }
 
 
-
-
-
-
+  handleChange(event){
+      let { form } = this.state
+      form.user[event.target.name] = event.target.value
+      this.setState({form: form})
+  }
   render() {
+    console.log("Profile",this.state.user);
     return (
-            <div className= "profileForm">
+        <div className="move"><img src="http://agromarketday.com/images/profile-holder.png"
+        alt="img" class="responsive"/>
+
+<div class="infocontainer">
+
+      <FormGroup className="ProfileInfo">
+
+      <ul>
+              <FormControl
+                  type='text'
+                  name='first_name'
+                  value={this.state.value}
+                  placeholder={this.state.user.first_name}
+                  onChange={this.handleChange.bind(this)}/>
 
 
-            <div className="profileForm_info">
-            <h2 className="profileHeader">
-            <ProfileImage  /></h2>
-
-                    {this.state.user.first_name}&nbsp;
-                    {this.state.user.last_name}<br/>
-
-                    {this.state.user.email}<br/>
-                    {this.state.user.phone}<br/>
-                    {this.state.user.city},&nbsp;
-                    {this.state.user.state}<br/>
-                    {this.state.user.zip}
-
-                    <div class="footer">
-                    <h3>About Us&nbsp;
-                    Contact Us</h3>
-                    </div>
-
-                </div>
+                  <FormControl
+                      type='text'
+                      name='last_name'
+                      value={this.state.value}
+                      placeholder={this.state.user.last_name}
+                      onChange={this.handleChange.bind(this)}/>
 
 
+                  <FormControl
+                      type='text'
+                      name='email'
+                      value={this.state.value}
+                      placeholder={this.state.user.email}
+                      onChange={this.handleChange.bind(this)}/>
 
-        </div>
+
+                  <FormControl
+                      type='text'
+                      name='phone'
+                      value={this.state.value}
+                      placeholder={this.state.user.phone}
+                      onChange={this.handleChange.bind(this)}/>
+
+
+
+                  <FormControl
+                      type='text'
+                      name='city'
+                      value={this.state.value}
+                      placeholder={this.state.user.city}
+                      onChange={this.handleChange.bind(this)}/>
+
+
+                  <FormControl
+                      type='text'
+                      name='state'
+                      value={this.state.value}
+                      placeholder={this.state.user.state}
+                      onChange={this.handleChange.bind(this)}/>
+
+
+                  <FormControl
+                      type='text'
+                      name='zip'
+                      value={this.state.value}
+                      placeholder={this.state.user.zip}
+                      onChange={this.handleChange.bind(this)}/>
+
+
+                  <FormControl
+                      type='password'
+                      name='password'
+                      value={this.state.value}
+                      placeholder={this.state.user.password}
+                      onChange={this.handleChange.bind(this)}/>
+
+
+
+                  <Button bsStyle="primary" type='submit' value='submit'>Save</Button>
+
+                  </ul>
+          </FormGroup>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+     </div>
     );
   }
 }
 
 export default AccountInfo;
 
-// <div className="card border-danger mb-3"  style={this.myCardStyle}>
-// <div className="card-header">Profile</div>
-// <div className="card-body">
-// <h4 className="card-title">Primary card title</h4>
-// <p className="card-text">
-//   <ul >
-//       <div>
-//           <h1>{this.state.user.first_name}</h1>
-//           <h1>{this.state.user.last_name}</h1>
-//           <h1>{this.state.user.email}</h1>
-//           <h1>{this.state.user.phone}</h1>
-//           <h1>{this.state.user.city}</h1>
-//           <h1>{this.state.user.state}</h1>
-//           <h1>{this.state.user.zip}</h1>
-//       </div>
-//   </ul>
-// </p>
-// </div>
 // </div>
