@@ -1,0 +1,45 @@
+.profileForm {
+    margin: fixed;
+    margin-top: fixed;
+    border-radius: 50px;
+    display: center;
+    text-align: center;
+    align-items: center;
+
+}
+
+.profileForm_info {
+    margin-top: 200px;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+    font-color: black;
+}
+
+.img {
+    align-items: center;
+    vertical-align: center;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+}
+
+.footer {
+    height: 50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    text-align: center;
+    font-style: italic;
+    position: fixed;
+    bottom: 0;
+
+}
+.SavedRecipes {
+background-color: white;
+color: red;
+text-align: center;
+font-size: 20px;
+}

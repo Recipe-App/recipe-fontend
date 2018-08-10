@@ -50,7 +50,6 @@ class SavedRecipes extends Component {
 
   render() {
       return(
-
         <div className="flex-container">
 
         <GroceryList saved={this.props.saved} show={this.state.show} handleClose={this.handleClose}/>
