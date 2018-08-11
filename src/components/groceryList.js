@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { arrInt } from '../services/DataFormat'
+
+const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
+
 
 class GroceryList extends Component {
+    constructor(props){
+      super(props)
+      this.state = {
+          ids: this.props.ids,
+          groceryList: []
+      }
+    }
 
 //TODO
     // processIngredients(array) {  Fix later
@@ -14,36 +25,69 @@ class GroceryList extends Component {
     //       }
     //     })
     // }
-  
+    handleRemove(event){
+      let toRemove = event.target.id //This is the button id that corresponds to a certin recipe
+      if (!this.state.ids.split().includes(',')) { //When there is only one recipe left
+          sessionStorage.setItem('ids', "placeholder")
+      } else {  //When there is more than one recipe left
+            let filteredIds = this.state.ids.split(',').filter( id => id !== toRemove)  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+
+            sessionStorage.setItem('ids', filteredIds)  //The updated ids are saved in session storage and available in state
+
+            this.setState({ ids: filteredIds })
+      }
+    }
+
+    // componentWillMount(){
+    //     if (this.state.ids != "placeholder") {
+    //         let { ids } = this.state
+    //         console.log("this.state.ids in the component will mount: ", this.state.ids);
+    //         console.log("type of this.state.ids: ",  this.state.ids.split(','));
+    //         let groceryList = this.props.saved.filter( savedRecipe =>
+    //             ids.split(',').includes(savedRecipe.id)  //Here we filter out all the recipes that we want to show up in the grocery list based on the process ids array from state
+    //         )
+    //
+    //         this.setState({ groceryList })  //Here we are saving the data for the grocery list recipes into state as a staging location before it is sent to the GroceryList component as props
+    //     }
+    // }
 
     render() {
-        let ids = sessionStorage.getItem('ids')
+      console.log("Here are the IDS from groceryList: ", this.state.ids);
+        // let { ids } = this.state
+        // let groceryList = this.props.saved.filter( savedRecipe =>
+        //   ids.split(',').includes(savedRecipe.id)  //Here we filter out all the recipes that we want to show up in the grocery list based on the process ids array from state
+        // )
         return(
-          <Modal show={this.props.show} onHide={this.props.handleClose}         bsSize="small"
+          <Modal ids={this.state.ids} show={this.props.show} onHide={this.props.handleClose} bsSize="small"
 >
               <Modal.Header closeButton>
                   <Modal.Title>Shopping List</Modal.Title>
               </Modal.Header>
               <Modal.Body>
               {
-                ids != ["placeholder"] ?
-                  ids.split(',').map((id) => {
-                  let index = parseInt(id)
-                  let label = this.props.saved[index].label
-                  let ingredients =   this.props.saved[index].ingredients.split(',')
-                  return (
-                    <div>
-                    <h6>{label}</h6>
-                    <ul>
-                    {ingredients.map((item) => {
+                  this.state.ids !== "placeholder" ?
+
+
+
+                  this.state.groceryList.map((item) => {
                       return (
-                        <li>{item}</li>
+                        <div>
+                            <OverlayTrigger placement="right" overlay={tooltip}>
+                                <a className="remove" onClick={this.handleRemove.bind(this)}>
+                                    <h5>{item.label}</h5>
+                                </a>
+                            </OverlayTrigger>
+
+                            <ul>
+                            {item.ingredients.split(',').map((item) => {
+                              return (
+                                <li>{item}</li>
+                              )
+                            })}
+                            </ul>
+                        </div>
                       )
-                    })}
-                    </ul>
-                    </div>
-                  )
-                  })
+                    })
 
                 : <p>There are no ingredients in the shopping list </p>
 
