@@ -92,9 +92,7 @@ class SavedRecipes extends Component {
 
 
   render() {
-    console.log("Id Array: ", this.state.ids);
-    console.log("Recipes in Grocery List: ", this.state.groceryList);
-    // console.log("Saved Recipes Array: ", this.props.saved);
+  
       return(
 
         <div className="flex-container">

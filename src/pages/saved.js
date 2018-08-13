@@ -9,8 +9,7 @@ class Saved extends Component {
   constructor(props){
     super(props)
     this.state = {
-      saved: [],
-      modalClicked:false
+      saved: []
     }
   }
 
@@ -34,5 +33,3 @@ class Saved extends Component {
 }
 
 export default Saved
-
-// <GroceryList saved={this.state.saved.recipes}/>
