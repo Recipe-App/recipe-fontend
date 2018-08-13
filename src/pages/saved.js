@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { getSaved } from '../api/index'
 
 import SavedRecipes from '../components/savedRecipes'
-import GroceryList from '../components/groceryList'
+
 
 class Saved extends Component {
 

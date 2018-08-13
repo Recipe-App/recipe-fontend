@@ -3,8 +3,6 @@ import { Image, Button, Modal, Panel, OverlayTrigger, Tooltip } from 'react-boot
 import { deleteRecipe } from '../api/index'
 import '../App.css'
 
-import GroceryList from './groceryList'
-
 const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
 
 class SavedRecipes extends Component {
@@ -92,8 +90,9 @@ class SavedRecipes extends Component {
 
 
   render() {
-  
+
       return(
+
         <div className="flex-container">
 
         <Button className="list_style" bsSize="large" onClick={this.handleShow}>
