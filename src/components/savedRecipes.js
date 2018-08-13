@@ -31,35 +31,32 @@ class SavedRecipes extends Component {
       this.setState({ show: true });
   }
 
+  handleClear = () => {
+    let ids = "placeholder"
+    let groceryList = []
+    this.setState({ ids, groceryList })
+  }
+
   handleRemove = (event) => {
-    console.log("This is the event in handleRemove: ", event.target.id);
     let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
-    console.log("toRemove: ", toRemove
-    );
+    let groceryList
+
     if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
         sessionStorage.setItem('ids', "placeholder")
-        let ids = sessionStorage.getItem('ids', "placeholder")
-        let groceryList = []
-
-        this.setState({ ids, groceryList })
+        groceryList = []
 
     } else {  //When there is more than one recipe left
-          console.log(this.state.ids.split(','))
 
+          let updatedIds = this.state.ids.split(',').filter( id => id !== toRemove )  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+          sessionStorage.setItem('ids', updatedIds)  //The updated ids are saved in session storage and available in state
 
-          let ids = this.state.ids.split(',').filter( id => {
-            console.log(typeof id)
-            console.log(typeof toRemove)
-            console.log(id !== toRemove);
+          groceryList = this.props.saved.filter(( savedRecipe => updatedIds.includes(String(savedRecipe.id))))
 
-            return(id !== toRemove)})  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
-          console.log("These are the updated ids: ", ids);
-          sessionStorage.setItem('ids', ids)  //The updated ids are saved in session storage and available in state
-          ids = sessionStorage.getItem('ids')
-          let groceryList = this.props.saved.filter(( savedRecipe => ids.includes(String(savedRecipe.id))))
-
-          this.setState({ ids, groceryList })
     }
+
+    let ids = sessionStorage.getItem('ids')
+
+    this.setState({ ids, groceryList })
 
   }
 
@@ -141,6 +138,7 @@ class SavedRecipes extends Component {
             }
             </Modal.Body>
             <Modal.Footer>
+                <Button onClick={this.handleClear}>Clear</Button>
                 <Button onClick={this.handleSubmit}>Text Me</Button>
             </Modal.Footer>
         </Modal>
