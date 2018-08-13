@@ -53,7 +53,7 @@ let saveRecipes = (recipe) => {
 //These are all of our create methods
 
 let getRecipes = (pantry) => {
-  return fetch(`https://api.edamam.com/search?q=${pantry}&app_id=88d0fb8a&app_key=1608ffadf6a14d29bd7f096242dd660e&from=0&to=10`)
+  return fetch(`https://api.edamam.com/search?q=${pantry}&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}&from=0&to=10`)
 
   .then((rawResponse)=>{
     return rawResponse.json()

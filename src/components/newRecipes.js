@@ -4,7 +4,6 @@ import { Image, Button, Panel } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
 import ButtonFunction from './button'
 import '../App.css'
-// require('dotenv').config()
 
 class NewRecipes extends Component {
 
@@ -73,7 +72,7 @@ class NewRecipes extends Component {
 
         !switchs.array[id] ? saveRecipes(toSave) : deleteRecipe(id)
 
-        // saveRecipes(toSave) // this saves a unique recipe based on Id
+        // saveRecipes(toSave) // this saves a unique recipe based on Id TODO delete does not work yet 
     }
 
     componentWillMount(){
