@@ -94,7 +94,6 @@ class SavedRecipes extends Component {
   render() {
   
       return(
-
         <div className="flex-container">
 
         <Button className="list_style" bsSize="large" onClick={this.handleShow}>

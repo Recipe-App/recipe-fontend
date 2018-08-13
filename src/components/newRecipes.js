@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { getRecipes, saveRecipes, getPantryItems } from '../api/index'
+import { getRecipes, saveRecipes, getPantryItems, deleteRecipe} from '../api/index'
 import { Image, Button, Panel } from 'react-bootstrap'
 import AuthService from '../services/AuthService'
+import ButtonFunction from './button'
 import '../App.css'
-// require('dotenv').config()
 
 class NewRecipes extends Component {
 
@@ -16,6 +16,10 @@ class NewRecipes extends Component {
             },
             saved: {
               recipes:[]
+          },
+            switchs:{
+                array: [true,true,true,true,true,true,true,true,true,true]
+
             },
             open: []
         }
@@ -37,6 +41,16 @@ class NewRecipes extends Component {
       return toSave
     }
 
+
+    styleChange(x){
+        let { switchs } = this.state
+        switchs.array[x] = !switchs.array[x] ? true : false
+        this.setState({ switchs })
+
+
+
+    }
+
     togglePanel(event){
       console.log(event.target.id);
         let index = event.target.id
@@ -52,9 +66,13 @@ class NewRecipes extends Component {
         let id = event.target.id
         let { saved } = this.state
         let { recipes } = this.state.apiResp
-
+        let { switchs } = this.state
+        this.styleChange(id) // this changes the button style
         let toSave = {recipe: this.processRecipe(recipes[id])}  //This method works
-        saveRecipes(toSave)
+
+        !switchs.array[id] ? saveRecipes(toSave) : deleteRecipe(id)
+
+        // saveRecipes(toSave) // this saves a unique recipe based on Id TODO delete does not work yet 
     }
 
     componentWillMount(){
@@ -78,6 +96,9 @@ class NewRecipes extends Component {
       })
     }
 
+
+
+
     render() {
         return(
           <div className="flex-container">
@@ -89,7 +110,7 @@ class NewRecipes extends Component {
                </Panel.Heading>
                <Panel.Collapse>
                <Panel.Body collapsible>
-               <Button id={`${index}`} bsStyle="danger" className="button" onClick={this.handleClick.bind(this)}>Save Recipe</Button><br/><br/>
+               <ButtonFunction id={`${index}`} onClick= {this.handleClick.bind(this)} style={this.state.switchs.array[index]? "danger" : "warning"} text={this.state.switchs.array[index]? "Save Recipe" : "Undo"}/>
                     <h3>
                         <a className="title" href={element.recipe.url} target="_blank">{element.recipe.label}</a>
                     </h3>

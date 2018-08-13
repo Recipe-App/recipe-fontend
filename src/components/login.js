@@ -31,6 +31,7 @@ class LoginForm extends Component {
             <form onSubmit={this.handleFormSubmit.bind(this)}>
             <h1>Welcome to the Login Page!</h1>
                 <FormGroup>
+                
                     <ControlLabel>Email</ControlLabel>
                     <FormControl
                         type='text'
