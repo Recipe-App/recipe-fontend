@@ -12,7 +12,6 @@ let checkIfToken = () => {
 
 }
 
-
 //These are all of our create methods
 let createUser = (user) => {
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Button, Modal, Panel, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import {deleteRecipe} from '../api/index'
+import { deleteRecipe } from '../api/index'
 import '../App.css'
 
 import GroceryList from './groceryList'
@@ -31,17 +31,36 @@ class SavedRecipes extends Component {
       this.setState({ show: true });
   }
 
-  handleRemove(event){
-    let toRemove = event.target.id //This is the button id that corresponds to a certin recipe
-    if (!this.state.ids.split().includes(',')) { //When there is only one recipe left
+  handleRemove = (event) => {
+    console.log("This is the event in handleRemove: ", event.target.id);
+    let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
+    console.log("toRemove: ", toRemove
+    );
+    if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
         sessionStorage.setItem('ids', "placeholder")
+        let ids = sessionStorage.getItem('ids', "placeholder")
+        let groceryList = []
+
+        this.setState({ ids, groceryList })
+
     } else {  //When there is more than one recipe left
-          let filteredIds = this.state.ids.split(',').filter( id => id !== toRemove)  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+          console.log(this.state.ids.split(','))
 
-          sessionStorage.setItem('ids', filteredIds)  //The updated ids are saved in session storage and available in state
 
-          this.setState({ ids: filteredIds })
+          let ids = this.state.ids.split(',').filter( id => {
+            console.log(typeof id)
+            console.log(typeof toRemove)
+            console.log(id !== toRemove);
+
+            return(id !== toRemove)})  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+          console.log("These are the updated ids: ", ids);
+          sessionStorage.setItem('ids', ids)  //The updated ids are saved in session storage and available in state
+          ids = sessionStorage.getItem('ids')
+          let groceryList = this.props.saved.filter(( savedRecipe => ids.includes(String(savedRecipe.id))))
+
+          this.setState({ ids, groceryList })
     }
+
   }
 
   handleAdd(event){
@@ -58,12 +77,10 @@ class SavedRecipes extends Component {
           groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
     } else if (!ids.split(',').includes(id)) {  //If there are already many ids
           ids = ids + ',' + id;
-          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(savedRecipe.id) ))  //Here ids should have more than
+          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
     }
 
     sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
-
-    // window.location.reload(true)
 
     this.setState({ ids: sessionStorage.getItem('ids'),
                     groceryList: groceryList })
@@ -80,7 +97,7 @@ class SavedRecipes extends Component {
   render() {
     console.log("Id Array: ", this.state.ids);
     console.log("Recipes in Grocery List: ", this.state.groceryList);
-    console.log("Saved Recipes Array: ", this.props.saved);
+    // console.log("Saved Recipes Array: ", this.props.saved);
       return(
 
         <div className="flex-container">
@@ -102,10 +119,10 @@ class SavedRecipes extends Component {
               :   this.state.groceryList.map((item) => {
                       return (
                         <div>
-                            <OverlayTrigger placement="right" overlay={tooltip}>
-                                <a className="remove" onClick={this.handleRemove.bind(this)}>
-                                    <h5>{item.label}</h5>
-                                </a>
+                            <OverlayTrigger  onClick={this.handleRemove} placement="right" overlay={tooltip}>
+                                <div>
+                                    <h5 id={`${item.id}`}>{item.label}</h5>
+                                </div>
                             </OverlayTrigger>
 
                             <ul>
