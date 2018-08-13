@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Image, Button, Modal, Panel } from 'react-bootstrap'
+import { Image, Button, Modal, Panel, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import {deleteRecipe} from '../api/index'
 import '../App.css'
 
 import GroceryList from './groceryList'
 
+const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
 
 class SavedRecipes extends Component {
 
@@ -17,6 +18,7 @@ class SavedRecipes extends Component {
     this.state = {
         ids: sessionStorage.getItem('ids'),
         show: false,
+        groceryList: []
 
     }
   }
@@ -45,18 +47,26 @@ class SavedRecipes extends Component {
   handleAdd(event){
     let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
     let ids =  this.state.ids //create a copy of the ids in state
+    let { groceryList } = this.state
+    let saved = this.props.saved
 
     if (ids === "placeholder") {  //If the session just has the placeholder
         ids = id
+        groceryList = saved.filter(( savedRecipe => savedRecipe.id == ids ))  //Here ids should just have one number
     } else if (ids !== id){  //If there is just one id
-          ids = ids + ',' + id;
+          ids = ids + ',' + id
+          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
     } else if (!ids.split(',').includes(id)) {  //If there are already many ids
           ids = ids + ',' + id;
+          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(savedRecipe.id) ))  //Here ids should have more than
     }
 
     sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
-    window.location.reload(true)
-    this.setState({ids:sessionStorage.getItem('ids')})
+
+    // window.location.reload(true)
+
+    this.setState({ ids: sessionStorage.getItem('ids'),
+                    groceryList: groceryList })
 
   }
 
@@ -68,7 +78,9 @@ class SavedRecipes extends Component {
 
 
   render() {
-    console.log("Here are the IDS from savedRecipes, ", this.state.ids);
+    console.log("Id Array: ", this.state.ids);
+    console.log("Recipes in Grocery List: ", this.state.groceryList);
+    console.log("Saved Recipes Array: ", this.props.saved);
       return(
 
         <div className="flex-container">
@@ -77,48 +89,46 @@ class SavedRecipes extends Component {
         See Grocery List
         </Button>
 
-        <Modal ids={this.state.ids} show={this.props.show} onHide={this.props.handleClose} bsSize="small">
+        <Modal show={this.state.show} onHide={this.handleClose} bsSize="small">
             <Modal.Header closeButton>
                 <Modal.Title>Shopping List</Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
-            {
+            { this.state.ids == "placeholder" ?
 
+                  <p>There are no ingredients in the shopping list </p>
 
+              :   this.state.groceryList.map((item) => {
+                      return (
+                        <div>
+                            <OverlayTrigger placement="right" overlay={tooltip}>
+                                <a className="remove" onClick={this.handleRemove.bind(this)}>
+                                    <h5>{item.label}</h5>
+                                </a>
+                            </OverlayTrigger>
 
-
-                this.state.groceryList.map((item) => {
-                    return (
-                      <div>
-                          <OverlayTrigger placement="right" overlay={tooltip}>
-                              <a className="remove" onClick={this.handleRemove.bind(this)}>
-                                  <h5>{item.label}</h5>
-                              </a>
-                          </OverlayTrigger>
-
-                          <ul>
-                          {item.ingredients.split(',').map((item) => {
-                            return (
-                              <li>{item}</li>
-                            )
-                          })}
-                          </ul>
-                      </div>
-                    )
+                            <ul>
+                            {item.ingredients.split(',').map((item) => {
+                              return (
+                                <li>{item}</li>
+                              )
+                            })}
+                            </ul>
+                        </div>
+                      )
                   })
 
-              : <p>There are no ingredients in the shopping list </p>
+
 
             }
-
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={this.handleSubmit}>Text Me</Button>
             </Modal.Footer>
         </Modal>
 
-
-            {this.props.saved.map((recipe,index)=>{
+            { this.props.saved.map((recipe,index)=>{
                 return (
                   <Panel className="flex-item">
 

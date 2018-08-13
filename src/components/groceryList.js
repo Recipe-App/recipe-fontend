@@ -52,7 +52,6 @@ class GroceryList extends Component {
     // }
 
     render() {
-      console.log("Here are the IDS from groceryList: ", this.state.ids);
         // let { ids } = this.state
         // let groceryList = this.props.saved.filter( savedRecipe =>
         //   ids.split(',').includes(savedRecipe.id)  //Here we filter out all the recipes that we want to show up in the grocery list based on the process ids array from state
