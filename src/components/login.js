@@ -20,7 +20,7 @@ class LoginForm extends Component {
 
     handleFormSubmit(event){
         event.preventDefault()
-        let ids = sessionStorage.setItem("ids", ["placeholder"])  //This is a session that is used for the grocery list
+        let ids = sessionStorage.setItem("ids", "placeholder")  //This is a session that is used for the grocery list
         this.Auth.login(this.state.email,this.state.password)
             .then(res =>{this.props.history.replace('/')})
                 .catch(err =>{ alert(err) })

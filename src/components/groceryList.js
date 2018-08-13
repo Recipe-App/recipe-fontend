@@ -1,62 +1,26 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { arrInt } from '../services/DataFormat'
+
+const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
+
 
 class GroceryList extends Component {
-
-//TODO
-    // processIngredients(array) {  Fix later
-    //     array.map((element, index, array) => {
-    //       console.log(array);
-    //       if (array[index+1] != undefined && array[index+1][0] == ' ') {
-    //           return element + array[index + 1]
-    //       } else {
-    //         return element
-    //       }
-    //     })
-    // }
-  
+    constructor(props){
+      super(props)
+      this.state = {
+          ids: this.props.ids,
+          groceryList: []
+      }
+    }
 
     render() {
-        let ids = sessionStorage.getItem('ids')
+
         return(
-          <Modal show={this.props.show} onHide={this.props.handleClose}         bsSize="small"
->
-              <Modal.Header closeButton>
-                  <Modal.Title>Shopping List</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-              {
-                ids != ["placeholder"] ?
-                  ids.split(',').map((id) => {
-                  let index = parseInt(id)
-                  let label = this.props.saved[index].label
-                  let ingredients =   this.props.saved[index].ingredients.split(',')
-                  return (
-                    <div>
-                    <h6>{label}</h6>
-                    <ul>
-                    {ingredients.map((item) => {
-                      return (
-                        <li>{item}</li>
-                      )
-                    })}
-                    </ul>
-                    </div>
-                  )
-                  })
-
-                : <p>There are no ingredients in the shopping list </p>
-
-              }
-
-              </Modal.Body>
-              <Modal.Footer>
-                  <Button onClick={this.handleSubmit}>Text Me</Button>
-              </Modal.Footer>
-          </Modal>
-
+          <div>
+          </div>
         )
+
     }
-}
 
 export default GroceryList
