@@ -51,6 +51,24 @@ let saveRecipes = (recipe) => {
 
 //These are all of our create methods
 
+let sendText = (toText) => {
+  return fetch("http://localhost:3001/grocery_list", {
+
+      body: JSON.stringify(toText),
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Auth.getToken()
+
+
+      },
+      method: "POST"
+  })  .then((resp) => {
+          let json = resp.json()
+
+          return json
+      })
+}
+
 let getRecipes = (pantry) => {
   return fetch(`https://api.edamam.com/search?q=${pantry}&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}&from=0&to=10`)
 
@@ -131,6 +149,7 @@ export {
   getSaved,
   deleteRecipe,
   createPantryItems,
-  getPantryItems
+  getPantryItems,
+  sendText
 
 }
