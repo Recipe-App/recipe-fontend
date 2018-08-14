@@ -105,6 +105,59 @@
   color: black;
 }
 
+.card {
+
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+
+
+
+}
+
+.title {
+    color: black;
+    font-size: 18px;
+}
+
+button {
+    border:none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: red;
+    text-align: center;
+    cursor: pointer;
+    width: flex;
+    font-size: 20px;
+    align-self: center;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.UpdateName {
+    text-align: center;
+}
+
+.john {
+    border-radius: 50%;
+    display: flex;
+}
+
+.pic{
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.flex-container1 {
+    padding-left: 300px;
+    margin: 10%;
+    display: center;
+    flex-wrap : center;
+
 .saved{
   top: 50%;
   right: 50%;}
