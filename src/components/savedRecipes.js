@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Button, Modal, Panel, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { deleteRecipe } from '../api/index'
+import { deleteRecipe, sendText } from '../api/index'
 import '../App.css'
 
 const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
@@ -12,6 +12,7 @@ class SavedRecipes extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
         ids: sessionStorage.getItem('ids'),
@@ -21,11 +22,21 @@ class SavedRecipes extends Component {
     }
   }
 
-  handleClose() {
+  handleSubmit = () => {
+    console.log(this.state.groceryList);
+    this.state.groceryList.forEach( recipe => {
+      let toText = { text: { message: `//${recipe.label}// \n${recipe.ingredients}`}}
+      console.log(toText);
+      sendText(toText)
+          .then(resp => console.log(resp))
+    })
+  }
+
+  handleClose = () => {
       this.setState({ show: false });
   }
 
-  handleShow() {
+  handleShow = () => {
       this.setState({ show: true });
   }
 
@@ -58,7 +69,7 @@ class SavedRecipes extends Component {
 
   }
 
-  handleAdd(event){
+  handleAdd = (event) => {
     let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
     let ids =  this.state.ids //create a copy of the ids in state
     let { groceryList } = this.state
@@ -82,8 +93,7 @@ class SavedRecipes extends Component {
 
   }
 
-  handleDelete(event){
-    console.log(event.target.id)
+  handleDelete = (event) => {
     deleteRecipe(event.target.id)
     window.location.reload(true)
   }

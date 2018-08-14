@@ -24,8 +24,6 @@ class NewRecipes extends Component {
 
     processRecipe(recipe){  //It parses the raw recipe object to send to db
       let toSave = {user_id: "", label: "", ingredients: [], url: "", image: "", }
-
-      // console.log("This is the recipe in processRecipe: ", recipe);
       toSave.user_id = this.Auth.getUserId()
       toSave.label = recipe.label
       toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join()
@@ -38,24 +36,20 @@ class NewRecipes extends Component {
     handleClick(event){  // It adds the clicked recipe into state and prevents duplicate entries
 
         let id = event.target.id.split(',')  //"id" is an array of two strings.  id[0] is equal to the index of the button.  id[1] is equal to the recipe url for the corresponding button.
-        // console.log("This is the id of ");
+
         let index = parseInt(id[0])
         let url = id[1]
-        // console.log("This is the index of the clicked recipe: ", index);
-        // console.log("Which is a ", typeof index);
+
         let { saved } = this.state
         let { recipes } = this.state.apiResp
         let { clicked } = this.state
 
         clicked[index] = !clicked[index] //The button state is changed
-        // console.log("This is the recipes array: ", recipes);
 
         let recipeObj = recipes.filter(resp => resp.recipe.url === id[1])[0]  //recipeObj is the first element of a 1 element array of a sincle recipe.  recipeObj = [{...}][0] = {...}
 
-        if (clicked[index]){
-          console.log("This is the clicked array: ", clicked);
+        if (clicked[index]) {
 
-          // console.log(recipeObj);
           let toSave = {recipe: this.processRecipe(recipeObj.recipe)}  //This method works
           saveRecipes(toSave)
               .then( resp => {
@@ -100,12 +94,8 @@ class NewRecipes extends Component {
       })
     }
 
-
-
-
     render() {
-      console.log("This is the clicked array from state: ", this.state.clicked);
-      console.log("This is the saved array from state", this.state.saved);
+
         return(
           <div className="flex-container">
           {this.state.apiResp.recipes.map( (element, index) => {
