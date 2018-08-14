@@ -1,6 +1,6 @@
 import AuthService from '../services/AuthService'
 
-
+const DOMAIN = "http://localhost:3001"
 const Auth = new AuthService()
 
 
@@ -15,7 +15,7 @@ let checkIfToken = () => {
 //These are all of our create methods
 let createUser = (user) => {
 
-    return fetch("http://localhost:3001/users", {
+    return fetch(DOMAIN + "/users", {
 
         body: JSON.stringify(user),
         headers: {
@@ -32,7 +32,7 @@ let createUser = (user) => {
 }
 
 let saveRecipes = (recipe) => {
-  return fetch("http://localhost:3001/saved_recipes", {
+  return fetch(DOMAIN + "/saved_recipes", {
 
       body: JSON.stringify(recipe),
       headers: {
@@ -52,7 +52,7 @@ let saveRecipes = (recipe) => {
 //These are all of our create methods
 
 let sendText = (toText) => {
-  return fetch("http://localhost:3001/grocery_list", {
+  return fetch(DOMAIN + "/grocery_list", {
 
       body: JSON.stringify(toText),
       headers: {
@@ -82,17 +82,17 @@ let getRecipes = (pantry) => {
 }
 
 let getProfile = () => {
-  return Auth.fetch(`http://localhost:3001/users/${checkIfToken()}`)
+  return Auth.fetch(DOMAIN + `/users/${checkIfToken()}`)
 }
 
 let getSaved = () => {
-  return Auth.fetch(`http://localhost:3001/saved_recipes/${checkIfToken()}`)
+  return Auth.fetch(DOMAIN + `/saved_recipes/${checkIfToken()}`)
 }
 
 //These are all of our delete methods
 
 let deleteRecipe = (recipeID) => {
-  return fetch(`http://localhost:3001/saved_recipes/${recipeID}`, {
+  return fetch(DOMAIN + `/saved_recipes/${recipeID}`, {
 
       body: JSON.stringify(recipeID),
       headers: {
@@ -110,7 +110,7 @@ let deleteRecipe = (recipeID) => {
 
 let createPantryItems= function(pantry) {
 
-    return fetch("http://localhost:3001/pantry_items", {
+    return fetch(DOMAIN + "/pantry_items", {
 
         body: JSON.stringify(pantry),
         headers: {
@@ -128,7 +128,7 @@ let createPantryItems= function(pantry) {
 
 let getPantryItems= function(userId) {
 
-    return fetch(`http://localhost:3001/pantry_items/${userId}`, {
+    return fetch(DOMAIN + `/pantry_items/${userId}`, {
 
 
         method: "GET"
