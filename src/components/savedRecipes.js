@@ -10,10 +10,6 @@ class SavedRecipes extends Component {
   constructor(props){
     super(props)
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
     this.state = {
         ids: sessionStorage.getItem('ids'),
         show: false,
@@ -23,9 +19,9 @@ class SavedRecipes extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.state.groceryList);
+
     this.state.groceryList.forEach( recipe => {
-      let toText = { text: { message: `//${recipe.label}// \n${recipe.ingredients}`}}
+      let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
       console.log(toText);
       sendText(toText)
           .then(resp => console.log(resp))
