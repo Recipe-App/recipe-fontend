@@ -17,11 +17,18 @@
 }
 
 .header {
+  display: flex;
   background-color: white;
   position: fixed;
   top: 0;
   height: 50px;
   width: 100%;
+  justify-content: flex-start;
+  flex-direction: row;
+  overflow: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+
 }
 
 .modal-container {
@@ -43,4 +50,46 @@
   right: 20px;
   width: 200px;
   background-color: red;
+}
+
+
+.buttonLanding {
+  padding: 5px;
+  border-bottom: 2px;
+  text-align: center;
+  margin-top: 10px;
+
+
+
+}
+
+.h1Landing {
+  flex: display;
+  text-align: center;
+  font-family: 'Amaranth';
+  font-weight: bold;
+  overflow: hidden;
+
+}
+
+
+
+.landingFormContainer{
+  display: flex;
+  justify-content: center;
+}
+
+
+.landingForm{
+  font: 95% Arial, Helvetica, sans-serif;
+    max-width: 500px;
+    height: 300px;
+    margin: 20px auto;
+    padding: 16px;
+    background: #F7F7F7;
+    border: 1px;
+    box-sizing: content-box;
+    display: block;
+    margin-bottom: 1rem;
+
 }

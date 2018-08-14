@@ -60,48 +60,61 @@ componentWillMount(){
 
     render() {
         return(
-                <form onSubmit={this.handleSubmit.bind(this)}>
+          <div className="landingFormContainer">
+            <div>
+
+
+            <h1 className="h1Landing">Enter your Pantry Items</h1>
+
+                <form className= "landingForm" onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup>
-                        <ControlLabel>Protein</ControlLabel>
+
                             <FormControl
                                 type='text'
                                 name='proteins'
-                                    value={this.state.form.pantry_item.proteins}
+                                value={this.state.form.pantry_item.proteins}
+                                placeholder= "Proteins"
+
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>Vegetables</ControlLabel>
+
                             <FormControl
                                 type='text'
                                 name='veggies'
                                 value={this.state.form.pantry_item.veggies}
+                                placeholder = 'Vegetables'
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>Grains</ControlLabel>
+
                             <FormControl
                                 type='text'
                                 name='grains'
                                 value={this.state.form.pantry_item.grains}
+                                placeholder= 'Grains'
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>Spices</ControlLabel>
+
                             <FormControl
                                 type='text'
                                 name='seasonings'
+                                placeholder= 'Spices'
                                 value={this.state.form.pantry_item.seasonings}
                                 onChange={this.handleChange.bind(this)}/>
 
-                        <ControlLabel>Other</ControlLabel>
                             <FormControl
                                 type='text'
                                 name='other'
+                                placeholder= 'Other'
                                 value={this.state.form.pantry_item.other}
                                 onChange={this.handleChange.bind(this)}/>
 
 
-                        <Button bsStyle="primary" type='submit' value='submit'>submit</Button>
+                        <Button className="buttonLanding" bsStyle="danger" type='submit' value='submit'>submit</Button>
 
                 </FormGroup>
             </form>
+            </div>
+            </div>
         )
     }
 }
