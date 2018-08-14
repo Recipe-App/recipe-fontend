@@ -56,3 +56,8 @@
 .remove{
   color: black;
 }
+
+.saved{
+  top: 50%;
+  right: 50%;
+}
