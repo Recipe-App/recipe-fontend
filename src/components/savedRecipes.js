@@ -18,11 +18,10 @@ class SavedRecipes extends Component {
     }
   }
 
-  handleSubmit = () => {
+  handleText = () => {
 
     this.state.groceryList.forEach( recipe => {
-      let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
-      console.log(toText);
+      let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}} //Implement REGEXX
       sendText(toText)
           .then(resp => console.log(resp))
     })
@@ -33,7 +32,7 @@ class SavedRecipes extends Component {
   }
 
   handleShow = () => {
-      this.setState({ show: true });
+      this.setState({ show: true })
   }
 
   handleClear = () => {
@@ -65,34 +64,35 @@ class SavedRecipes extends Component {
 
   }
 
-  handleAdd = (event) => {
-    let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
-    let ids =  this.state.ids //create a copy of the ids in state
-    let { groceryList } = this.state
-    let saved = this.props.saved
+  // handleAdd = (event) => {
+  //   let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
+  //   console.log(id);
+  //   let ids =  this.state.ids //create a copy of the ids in state
+  //   let { groceryList } = this.state
+  //   let saved = this.props.saved
+  //
+  //   if (ids === "placeholder") {  //If the session just has the placeholder
+  //       ids = id
+  //       groceryList = saved.filter(( savedRecipe => savedRecipe.id == ids ))  //Here ids should just have one number
+  //   } else if (ids !== id){  //If there is just one id
+  //         ids = ids + ',' + id
+  //         groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
+  //   } else if (!ids.split(',').includes(id)) {  //If there are already many ids
+  //         ids = ids + ',' + id;
+  //         groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
+  //   }
+  //
+  //   sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
+  //
+  //   this.setState({ ids: sessionStorage.getItem('ids'),
+  //                   groceryList: groceryList })
+  //
+  // }
 
-    if (ids === "placeholder") {  //If the session just has the placeholder
-        ids = id
-        groceryList = saved.filter(( savedRecipe => savedRecipe.id == ids ))  //Here ids should just have one number
-    } else if (ids !== id){  //If there is just one id
-          ids = ids + ',' + id
-          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
-    } else if (!ids.split(',').includes(id)) {  //If there are already many ids
-          ids = ids + ',' + id;
-          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
-    }
-
-    sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
-
-    this.setState({ ids: sessionStorage.getItem('ids'),
-                    groceryList: groceryList })
-
-  }
-
-  handleDelete = (event) => {
-    deleteRecipe(event.target.id)
-    window.location.reload(true)
-  }
+  // handleDelete = (event) => {
+  //   deleteRecipe(event.target.id)
+  //   window.location.reload(true)
+  // }
 
 
   render() {
@@ -111,14 +111,14 @@ class SavedRecipes extends Component {
             </Modal.Header>
 
             <Modal.Body>
-            { this.state.ids == "placeholder" ?
+            { this.props.ids == "placeholder" ?
 
                   <p>There are no ingredients in the shopping list </p>
 
-              :   this.state.groceryList.map((item) => {
+              :   this.props.groceryList.map((item) => {
                       return (
                         <div>
-                            <OverlayTrigger  onClick={this.handleRemove} placement="right" overlay={tooltip}>
+                            <OverlayTrigger  onClick={this.props.handleRemove} placement="right" overlay={tooltip}>
                                 <div>
                                     <h5 id={`${item.id}`}>{item.label}</h5>
                                 </div>
@@ -154,9 +154,9 @@ class SavedRecipes extends Component {
                       </Panel.Heading>
 
                       <Panel.Body>
-                          <Button id={`${recipe.id}`} bsStyle="danger" className="button" onClick={this.handleDelete.bind(this)}>Unsave</Button>
+                          <Button id={`${recipe.id}`} bsStyle="danger" className="button" onClick={this.props.handleDelete}>Unsave</Button>
 
-                          <Button id={`${recipe.id}`} bsStyle="success"  className="button" onClick={this.handleAdd.bind(this)}>Add To Grocery List</Button><br/><br/>
+                          <Button id={`${recipe.id}`} bsStyle="success"  className="button" onClick={this.props.handleAdd}>Add To Grocery List</Button><br/><br/>
 
                           <h3>
                           <a href={recipe.url} className="title" target="_blank">{recipe.label}</a>

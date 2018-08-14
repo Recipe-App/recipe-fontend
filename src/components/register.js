@@ -44,10 +44,10 @@ class RegisterForm extends Component {
                 this.props.history.replace('/login')
               })
 
-        this.Auth.login(this.state.form.user.email,this.state.form.user.password)
-            .then(res =>{
-              this.props.history.replace('/')
-            })
+        // this.Auth.login(this.state.form.user.email,this.state.form.user.password)
+        //     .then(res =>{
+        //       this.props.history.replace('/')
+        //     })
     }
 
     styleIt = {
