@@ -1,6 +1,6 @@
 import AuthService from '../services/AuthService'
 
-const DOMAIN = "http://localhost:3001"
+const DOMAIN = "https://the-recipe-app.herokuapp.com/"
 const Auth = new AuthService()
 
 
