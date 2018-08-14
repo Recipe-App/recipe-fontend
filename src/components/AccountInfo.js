@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FormGroup } from 'react';
 import { getProfile } from '../api/index'
 import ProfileImage from '../components/profileimage'
 
@@ -11,6 +11,8 @@ class AccountInfo extends Component {
     this.state = {
       user: ""
     }
+this.handleChange = this.handleChange.bind(this);
+this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount(){
@@ -19,39 +21,55 @@ class AccountInfo extends Component {
     })
   }
 
+  handleChange(event){
 
+  }
+
+  handleSubmit(event){
+      event.preventDefault()
+      let { form } = this.state
+
+      form.user.password_confirmation = form.user.password}
 
 
 
 
   render() {
     return (
-            <div className= "profileForm">
 
+            <div class="flex-container1">
+            
+            <img class="pic" src="https://i.stack.imgur.com/dr5qp.jpg" alt="john" />
+            <ul><h4><b>Update Information:</b></h4>
 
-            <div className="profileForm_info">
-            <h2 className="profileHeader">
-            <ProfileImage  /></h2>
+                <p><input type="text" name="first name" placeholder={this.state.user.first_name} onChange={this.handleChange.bind(this)} /></p>
 
-                    {this.state.user.first_name}&nbsp;
-                    {this.state.user.last_name}<br/>
+                <p><input type="text" name="last name" placeholder={this.state.user.last_name} onChange={this.handleChange.bind(this)} /></p>
 
-                    {this.state.user.email}<br/>
-                    {this.state.user.phone}<br/>
-                    {this.state.user.city},&nbsp;
-                    {this.state.user.state}<br/>
-                    {this.state.user.zip}
+                <p><input type="text" name="email" placeholder={this.state.user.email}  onChange={this.handleChange.bind(this)} /></p>
 
-                    <div class="footer">
-                    <h3>About Us&nbsp;
-                    Contact Us</h3>
+                <p><input type="text" name="phone" placeholder={this.state.user.phone} value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+
+                <p><input type="text" name="city" placeholder={this.state.user.city} value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+
+                <p><input type="text" name="state" placeholder={this.state.user.state} value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+
+                <p><input type="text" name="zip" placeholder={this.state.user.zip} value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+
+                <p><input type="password" name="password" placeholder="Update Password" value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+
+                <p><input type="password" name="confirm" placeholder="Confirm Password" value={this.state.title} onChange={this.handleChange.bind(this)} /></p>
+                <p><button>Save</button></p>
+
+            </ul>
+            <div class="footer">
+                    <h5>About Us&nbsp;
+                    Contact Us</h5>
                     </div>
 
-                </div>
 
+                    </div>
 
-
-        </div>
     );
   }
 }

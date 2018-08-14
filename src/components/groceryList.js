@@ -21,6 +21,6 @@ class GroceryList extends Component {
           </div>
         )
 
-    }
+    }}
 
 export default GroceryList
