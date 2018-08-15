@@ -22,7 +22,6 @@ class SavedRecipes extends Component {
 
     this.state.groceryList.forEach( recipe => {
       let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
-      console.log(toText);
       sendText(toText)
           .then(resp => console.log(resp))
     })

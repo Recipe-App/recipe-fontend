@@ -48,6 +48,7 @@ let saveRecipes = (recipe) => {
 
           return json
       })
+      .catch( err => console.log(err))
 }
 
 //These are all of our create methods
@@ -63,7 +64,8 @@ let sendText = (toText) => {
 
       },
       method: "POST"
-  })  .then((resp) => {
+  })
+  .then((resp) => {
           let json = resp.json()
 
           return json
