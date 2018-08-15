@@ -157,6 +157,7 @@ button:hover {
     margin: 10%;
     display: center;
     flex-wrap : center;
+}
 
 .saved{
   top: 50%;
