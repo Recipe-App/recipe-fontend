@@ -1,6 +1,8 @@
 import AuthService from '../services/AuthService'
 
-const DOMAIN = "https://the-recipe-app.herokuapp.com/"
+// const DOMAIN = "https://the-recipe-app.herokuapp.com"
+const DOMAIN = "http://localhost:3001"
+
 const Auth = new AuthService()
 
 
@@ -79,6 +81,8 @@ let getRecipes = (pantry) => {
   .then((parasedResponse) => {
     return parasedResponse.hits;
   })
+
+  .catch( err => console.log(err))
 }
 
 let getProfile = () => {
@@ -101,9 +105,7 @@ let deleteRecipe = (recipeID) => {
       },
       method: "DELETE"
   })  .then((resp) => {
-          console.log(resp);
           let json = resp.json()
-
           return Promise.resolve(resp);
       })
 }

@@ -41,13 +41,13 @@ class RegisterForm extends Component {
             .then(successUser => {
               console.log(this.state.form.password);
               console.log(this.state.form.email);
-                this.props.history.replace('/login')
+                this.props.history.replace('/')
               })
 
-        this.Auth.login(this.state.form.user.email,this.state.form.user.password)
-            .then(res =>{
-              this.props.history.replace('/')
-            })
+        // this.Auth.login(this.state.form.user.email,this.state.form.user.password)
+        //     .then(res =>{
+        //       this.props.history.replace('/')
+        //     })
     }
 
     styleIt = {

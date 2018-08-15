@@ -34,9 +34,8 @@ class LandingForm extends Component{
         createPantryItems(form)
         .then(successPantry => {
             this.props.history.replace('/recipes')
-
-
         })
+        .catch( err => console.log(err) )
 
 
 }
