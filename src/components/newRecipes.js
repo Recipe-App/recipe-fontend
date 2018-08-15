@@ -26,7 +26,8 @@ class NewRecipes extends Component {
       let toSave = {user_id: "", label: "", ingredients: [], url: "", image: "", }
       toSave.user_id = this.Auth.getUserId()
       toSave.label = recipe.label
-      toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join()
+      toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join("//")
+      console.log("This is what a list of ingredients looks like before it is sent to the db:", recipe.ingredients.map( obj => obj.text ))
       toSave.url = recipe.url
       toSave.image = recipe.image
 

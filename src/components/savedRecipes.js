@@ -95,7 +95,7 @@ class SavedRecipes extends Component {
 
 
   render() {
-
+      console.log(this.props.saved[0]);
       return(
 
         <div className="flex-container">
@@ -162,7 +162,7 @@ class SavedRecipes extends Component {
                           </h3>
 
                           <ul>
-                              {recipe.ingredients.split(',').map((ingredient) => {
+                              { recipe.ingredients.split(',').map((ingredient) => {
                                   return(
                                   <div>
                                     <li> {ingredient} </li>
