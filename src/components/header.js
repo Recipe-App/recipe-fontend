@@ -25,7 +25,7 @@ class Header extends Component {
 
 
                         ? <Nav>
-                              <NavItem href="/">
+                              <NavItem href="/pantry">
                               Pantry
                               </NavItem>
                               <NavItem href="/recipes">
@@ -37,14 +37,14 @@ class Header extends Component {
                               <NavItem href="/profile">
                               Profile
                               </NavItem>
-                              <NavItem onClick={this.handleLogout} href="/login">
+                              <NavItem onClick={this.handleLogout} href="/">
                               Logout
                               </NavItem>
 
                           </Nav>
 
                         : <NavItem>
-                            <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+                            <Link to="/">Login</Link> | <Link to="/register">Register</Link>
                           </NavItem>
 
                     }
