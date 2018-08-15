@@ -53,10 +53,12 @@ class NewRecipes extends Component {
           let toSave = {recipe: this.processRecipe(recipeObj.recipe)}  //This method works
           saveRecipes(toSave)
               .then( resp => {
+                  console.log("Recipe Saved!")
                   let { saved } = this.state
                   saved.push(resp)
                   this.setState({ saved, clicked })
               })
+              .catch( err => console.log(err))
 
         } else {
               let { saved } = this.state
@@ -66,6 +68,8 @@ class NewRecipes extends Component {
               saved = saved.filter( recipe => recipe.url !== url )
 
               deleteRecipe(toDelete.id)
+                .then( resp => console.log(resp))
+                // .catch( err => console.log(err))
 
               this.setState({ saved, clicked })
 
@@ -107,9 +111,9 @@ class NewRecipes extends Component {
                <Panel.Collapse>
                <Panel.Body collapsible>
                <ButtonFunction id={`${index},${element.recipe.url}`} onClick= {this.handleClick.bind(this)} style={!this.state.clicked[index] ? "danger" : "warning"} text={!this.state.clicked[index] ? "Save Recipe" : "Unsave Recipe"}/>
-                    <h3>
+                    <h1>
                         <a className="title" href={element.recipe.url} target="_blank">{element.recipe.label}</a>
-                    </h3>
+                    </h1>
                     <ul>{element.recipe.ingredients.map((elementTwo) =>{
                       return(
                       <div>
