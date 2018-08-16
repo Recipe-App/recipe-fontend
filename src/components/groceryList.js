@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { sendText } from '../api/index'
+
 import '../App.css'
 
 const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
@@ -12,7 +12,7 @@ class GroceryList extends Component {
         return(
 
           <Modal show={this.props.show} onHide={this.props.handleClose} bsSize="small">
-          
+
               <Modal.Header closeButton>
                   <Modal.Title> Shopping List </Modal.Title>
               </Modal.Header>

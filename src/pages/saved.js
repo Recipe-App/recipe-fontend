@@ -94,30 +94,31 @@ class Saved extends Component {
 
   }
 
-  handleSubmit = () => {
-    this.state.groceryList.forEach( recipe => {
-      let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
-      sendText(toText)
-          .then(resp => console.log(resp))
-    })
-  }
+    handleSubmit = () => {
+        console.log(this.state.groceryList);
+        this.state.groceryList.forEach( recipe => {
+          let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
+          sendText(toText)
+              .then(resp => console.log(resp))
+        })
+    }
 
-  componentWillMount(){
-    getSaved()
-      .then( res =>
-        { let saved = this.state
-          saved = res.recipes
-          console.log(saved);
-          this.setState({ saved })})
-  }
+    componentWillMount(){
+        getSaved()
+            .then( res =>
+                { let saved = res.recipes
+                  this.setState({ saved })})
+    }
 
     render() {
+      console.log(this.state.show);
+
         return(
           <div>
           {this.state.saved.length != 0 ?
             <div>
 
-                <Button className="list_style" bsSize="large" onClick={this.props.handleShow}>
+                <Button className="list_style" bsSize="large" onClick={this.handleShow}>
                 See Grocery List
                 </Button>
 
