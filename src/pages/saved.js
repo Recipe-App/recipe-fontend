@@ -55,44 +55,46 @@ class Saved extends Component {
     }
 
     handleRemove = (event) => {
-      let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
-      let groceryList
+        let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
+        let groceryList
 
-      if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
-          sessionStorage.setItem('ids', "placeholder")
-          groceryList = []
+        if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
+            sessionStorage.setItem('ids', "placeholder")
+            groceryList = []
 
-      } else {  //When there is more than one recipe left
+        } else {  //When there is more than one recipe left
 
-            let updatedIds = this.state.ids.split(',').filter( id => id !== toRemove )  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
-            sessionStorage.setItem('ids', updatedIds)  //The updated ids are saved in session storage and available in state
+              let updatedIds = this.state.ids.split(',').filter( id => id !== toRemove )  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+              sessionStorage.setItem('ids', updatedIds)  //The updated ids are saved in session storage and available in state
 
-            groceryList = this.state.saved.filter(( savedRecipe => updatedIds.includes(String(savedRecipe.id))))
+              groceryList = this.state.saved.filter( savedRecipe => updatedIds.includes(String(savedRecipe.id)))
 
-      }
+        }
 
-      let ids = sessionStorage.getItem('ids')
+        let ids = sessionStorage.getItem('ids')
 
-      this.setState({ ids, groceryList })
+        this.setState({ ids, groceryList })
 
     }
 
     handleDelete = (event) => {
-      let id = event.target.id
-      let { saved } = this.state
 
-      deleteRecipe(id)
+        let id = event.target.id
+        let { saved } = this.state
 
-      saved = saved.filter( recipe => recipe.id !== parseInt(id) )
+        deleteRecipe(id)
 
-      this.setState({ saved })
+        saved = saved.filter( recipe => recipe.id !== parseInt(id) )
+
+        this.setState({ saved })
 
     }
 
     handleSubmit = () => {
-        console.log(this.state.groceryList);
+      
         this.state.groceryList.forEach( recipe => {
-          let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split(',').map( string => typeof(parseInt(string[0])) === "number" ? "- " + string + "\n" : "  " + string + "\n").join('')}`}}
+          let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split('//').map( string =>
+            "- " + string + "\n\n").join('')}`}}
           sendText(toText)
               .then(resp => console.log(resp))
         })

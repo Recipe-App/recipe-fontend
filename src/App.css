@@ -46,7 +46,7 @@
 }
 
 .list_style{
-  z-index:9999999;
+  z-index:9999;
   color: white;
   font-weight: bold;
   position:fixed;
@@ -166,5 +166,4 @@ button:hover {
 .empty-saved-page{
   padding-left: 35%;
   padding-top: 10%;
-
 }
