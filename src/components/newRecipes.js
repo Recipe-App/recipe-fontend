@@ -23,11 +23,13 @@ class NewRecipes extends Component {
 
 
     processRecipe(recipe){  //It parses the raw recipe object to send to db
-      let toSave = {user_id: "", label: "", ingredients: [], url: "", image: "", }
+      let toSave = {user_id: "", label: "", ingredients: "", url: "", image: "", }
       toSave.user_id = this.Auth.getUserId()
       toSave.label = recipe.label
       toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join("//")
-      console.log("This is what a list of ingredients looks like before it is sent to the db:", recipe.ingredients.map( obj => obj.text ))
+      console.log("Ingredients String: ", recipe.ingredients)
+      console.log("Ingredients String: ", recipe.ingredients.map( obj => obj.text ))
+      console.log("Ingredients String: ", recipe.ingredients.map( obj => obj.text ).join("//"))
       toSave.url = recipe.url
       toSave.image = recipe.image
 
@@ -54,7 +56,7 @@ class NewRecipes extends Component {
           let toSave = {recipe: this.processRecipe(recipeObj.recipe)}  //This method works
           saveRecipes(toSave)
               .then( resp => {
-                  console.log("Recipe Saved!")
+                  console.log("Recipe Saved!", resp)
                   let { saved } = this.state
                   saved.push(resp)
                   this.setState({ saved, clicked })

@@ -95,7 +95,8 @@ class SavedRecipes extends Component {
 
 
   render() {
-      console.log(this.props.saved[0]);
+      console.log("First Ingredient: ", this.props.saved[0].ingredients.split('//').forEach(item => console.log(item)))
+      console.log(typeof this.props.saved[0].ingredients.split('//'));
       return(
 
         <div className="flex-container">
@@ -114,19 +115,19 @@ class SavedRecipes extends Component {
 
                   <p>There are no ingredients in the shopping list </p>
 
-              :   this.state.groceryList.map((item) => {
+              :   this.props.saved.map((recipe) => {
                       return (
                         <div>
                             <OverlayTrigger  onClick={this.handleRemove} placement="right" overlay={tooltip}>
                                 <div>
-                                    <h5 id={`${item.id}`}>{item.label}</h5>
+                                    <h5 id={`${recipe.id}`}>{recipe.label}</h5>
                                 </div>
                             </OverlayTrigger>
 
                             <ul>
-                            {item.ingredients.split(',').map((item) => {
+                            {recipe.ingredients.split('//').map((item) => {
                               return (
-                                <li>{item}</li>
+                                <li>Item</li>
                               )
                             })}
                             </ul>
@@ -162,7 +163,7 @@ class SavedRecipes extends Component {
                           </h3>
 
                           <ul>
-                              { recipe.ingredients.split(',').map((ingredient) => {
+                              { recipe.ingredients.split('//').map( ingredient => {
                                   return(
                                   <div>
                                     <li> {ingredient} </li>

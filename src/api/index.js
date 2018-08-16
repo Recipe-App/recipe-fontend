@@ -38,9 +38,7 @@ let saveRecipes = (recipe) => {
       body: JSON.stringify(recipe),
       method: "POST"
   })  .then((resp) => {
-          let json = resp.json()
-
-          return json
+          return resp
       })
       .catch( err => console.log(err))
 }
@@ -61,9 +59,7 @@ let sendText = (toText) => {
       method: "POST"
   })
   .then((resp) => {
-          let json = resp.json()
-
-          return json
+          return resp
       })
 }
 
