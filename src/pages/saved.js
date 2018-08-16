@@ -9,90 +9,85 @@ import GroceryList from '../components/groceryList'
 
 class Saved extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      saved: [],
-      ids: sessionStorage.getItem('ids'),
-      show: false,
-      groceryList: []
-    }
-  }
-
-  handleClose = () => {
-      this.setState({ show: false });
-  }
-
-  handleShow = () => {
-      this.setState({ show: true });
-  }
-
-  handleClear = () => {  //TODO Implement Redux Here
-    sessionStorage.setItem('ids', 'placeholder')
-    let ids = sessionStorage.getItem('ids')
-    let groceryList = []
-    this.setState({ ids, groceryList })
-  }
-
-
-  handleAdd = (event) => {
-    let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
-    let ids =  this.state.ids //create a copy of the ids in state
-    let { groceryList } = this.state
-    let saved = this.state.saved
-
-    if (ids === "placeholder") {  //If the session just has the placeholder
-        ids = id
-        groceryList = saved.filter(( savedRecipe => savedRecipe.id == ids ))  //Here ids should just have one number
-    } else if (ids !== id){  //If there is just one id
-          ids = ids + ',' + id
-          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
-    } else if (!ids.split(',').includes(id)) {  //If there are already many ids
-          ids = ids + ',' + id;
-          groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
+    constructor(props){
+      super(props)
+      this.state = {
+        saved: [],
+        ids: "placeholder",
+        show: false,
+        groceryList: []
+      }
     }
 
-    sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
+    handleClose = () => {
+        this.setState({ show: false });
+    }
 
-    this.setState({ ids: sessionStorage.getItem('ids'),
-                    groceryList: groceryList })
+    handleShow = () => {
+        this.setState({ show: true });
+    }
 
-  }
+    handleClear = () => {  //TODO Implement Redux Here
+      sessionStorage.setItem('ids', 'placeholder')
+      let ids = sessionStorage.getItem('ids')
+      let groceryList = []
+      this.setState({ ids, groceryList })
+    }
 
-  handleRemove = (event) => {
-    let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
-    let groceryList
+    handleAdd = (event) => {
+      let id = event.target.id  //This is the numeric id for the button that was clicked, which corresponds to the recipe id
+      let ids =  this.state.ids //create a copy of the ids in state
+      let saved = this.state.saved
+      let groceryList
 
-    if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
-        sessionStorage.setItem('ids', "placeholder")
-        groceryList = []
+      if (ids === "placeholder") {  //If the session just has the placeholder
+          ids = id
+          groceryList = saved.filter(( savedRecipe => savedRecipe.id == ids ))  //Here ids should just have one number
+      } else if (!ids.split(',').includes(id)) {  //If there are already many ids
+            ids = ids + ',' + id;
+            groceryList = saved.filter(( savedRecipe => ids.split(',').includes(String(savedRecipe.id))))  //Here ids should have more than
+      }
 
-    } else {  //When there is more than one recipe left
+      sessionStorage.setItem("ids", ids)  //Save filtered ids to session storage.  This will be made available in state
 
-          let updatedIds = this.state.ids.split(',').filter( id => id !== toRemove )  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
-          sessionStorage.setItem('ids', updatedIds)  //The updated ids are saved in session storage and available in state
-
-          groceryList = this.props.saved.filter(( savedRecipe => updatedIds.includes(String(savedRecipe.id))))
+      this.setState({ ids, groceryList })
 
     }
 
-    let ids = sessionStorage.getItem('ids')
+    handleRemove = (event) => {
+      let toRemove = String(event.target.id) //This is the button id that corresponds to a certin recipe
+      let groceryList
 
-    this.setState({ ids, groceryList })
+      if (!this.state.ids.split("").includes(',')) { //When there is only one recipe left
+          sessionStorage.setItem('ids', "placeholder")
+          groceryList = []
 
-  }
+      } else {  //When there is more than one recipe left
 
-  handleDelete = (event) => {
-    let id = event.target.id
-    let { saved } = this.state
+            let updatedIds = this.state.ids.split(',').filter( id => id !== toRemove )  //This filter allows all ids in the ids array to pass unless it matches the id that is to be removed
+            sessionStorage.setItem('ids', updatedIds)  //The updated ids are saved in session storage and available in state
 
-    deleteRecipe(id)
+            groceryList = this.state.saved.filter(( savedRecipe => updatedIds.includes(String(savedRecipe.id))))
 
-    saved = saved.filter( recipe => recipe.id !== parseInt(id) )
+      }
 
-    this.setState({ saved })
+      let ids = sessionStorage.getItem('ids')
 
-  }
+      this.setState({ ids, groceryList })
+
+    }
+
+    handleDelete = (event) => {
+      let id = event.target.id
+      let { saved } = this.state
+
+      deleteRecipe(id)
+
+      saved = saved.filter( recipe => recipe.id !== parseInt(id) )
+
+      this.setState({ saved })
+
+    }
 
     handleSubmit = () => {
         console.log(this.state.groceryList);
@@ -111,8 +106,7 @@ class Saved extends Component {
     }
 
     render() {
-      console.log(this.state.show);
-
+      console.log(this.state.groceryList);
         return(
           <div>
           {this.state.saved.length != 0 ?
@@ -122,18 +116,20 @@ class Saved extends Component {
                 See Grocery List
                 </Button>
 
-                <SavedRecipes handleDelete={this.handleDelete} saved={this.state.saved}/>
+                <SavedRecipes
+                    saved={this.state.saved}
+                    handleDelete={this.handleDelete}
+                    handleAdd={this.handleAdd}
+                />
 
                 <GroceryList
-                    saved={this.state.saved}
+                    groceryList={this.state.groceryList}
                     show={this.state.show}
-                    ids={this.state.ids}
-                    handleSubmit={this.handleSubmit}
                     handleShow={this.handleShow}
                     handleClose={this.handleClose}
-                    handleClear={this.handleClear}
-                    handleAdd={this.handleAdd}
                     handleRemove={this.handleRemove}
+                    handleClear={this.handleClear}
+                    handleSubmit={this.handleSubmit}
                 />
 
             </div>

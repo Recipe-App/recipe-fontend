@@ -18,11 +18,11 @@ class GroceryList extends Component {
               </Modal.Header>
 
               <Modal.Body>
-              { this.props.ids == "placeholder" ?
+              { this.props.groceryList.length === 0 ?
 
                     <p>There are no ingredients in the shopping list </p>
 
-                :   this.props.saved.map((recipe) => {
+                :   this.props.groceryList.map((recipe) => {
                         return (
                             <div>
                                 <OverlayTrigger  onClick={this.props.handleRemove} placement="right" overlay={tooltip}>
