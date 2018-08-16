@@ -1,26 +1,59 @@
 import React, { Component } from 'react'
-import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { arrInt } from '../services/DataFormat'
+import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap'
+
+import '../App.css'
 
 const tooltip = ( <Tooltip id="tooltip"> remove </Tooltip> )
 
-
 class GroceryList extends Component {
-    constructor(props){
-      super(props)
-      this.state = {
-          ids: this.props.ids,
-          groceryList: []
-      }
-    }
 
     render() {
 
         return(
-          <div>
-          </div>
-        )
 
-    }}
+          <Modal show={this.props.show} onHide={this.props.handleClose} bsSize="small">
+
+              <Modal.Header closeButton>
+                  <Modal.Title> Shopping List </Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+              { this.props.groceryList.length === 0 ?
+
+                    <p>There are no ingredients in the shopping list </p>
+
+                :   this.props.groceryList.map((recipe) => {
+                        return (
+                            <div>
+                                <OverlayTrigger  onClick={this.props.handleRemove} placement="right" overlay={tooltip}>
+                                    <div>
+                                        <h5 id={`${recipe.id}`}>{recipe.label}</h5>
+                                    </div>
+                                </OverlayTrigger>
+
+                                <ul>
+                                    {recipe.ingredients.split('//').map((item) => {
+                                      return (
+                                          <li>{ item }</li>
+                                      )
+                                    })}
+                                </ul>
+                            </div>
+                        )
+                    })
+              }
+
+              </Modal.Body>
+
+              <Modal.Footer>
+                  <Button onClick={this.props.handleClear}>Clear</Button>
+                  <Button onClick={this.props.handleSubmit}>Text Me</Button>
+              </Modal.Footer>
+
+          </Modal>
+
+        )
+    }
+}
 
 export default GroceryList

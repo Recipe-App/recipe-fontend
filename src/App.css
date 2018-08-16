@@ -162,3 +162,9 @@ button:hover {
 .saved{
   top: 50%;
   right: 50%;}
+
+.empty-saved-page{
+  padding-left: 35%;
+  padding-top: 10%;
+
+}
