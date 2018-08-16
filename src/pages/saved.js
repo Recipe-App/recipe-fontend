@@ -17,7 +17,10 @@ class Saved extends Component {
   componentWillMount(){
     getSaved()
       .then( res =>
-        {this.setState({ saved: res })})
+        { let saved = this.state
+          saved = res.recipes
+          console.log(saved);
+          this.setState({ saved })})
   }
 
     render() {
@@ -25,7 +28,7 @@ class Saved extends Component {
           <div>
           {this.state.saved.length != 0 &&
             <div>
-            <SavedRecipes saved={this.state.saved.recipes}/>
+            <SavedRecipes saved={this.state.saved}/>
             </div>
           }
           </div>

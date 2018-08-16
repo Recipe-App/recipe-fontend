@@ -2,7 +2,6 @@ import AuthService from '../services/AuthService'
 
 // const DOMAIN = "https://the-recipe-app.herokuapp.com"
 const DOMAIN = "http://localhost:3001"
-
 const Auth = new AuthService()
 
 
@@ -34,21 +33,14 @@ let createUser = (user) => {
 }
 
 let saveRecipes = (recipe) => {
-  return fetch(DOMAIN + "/saved_recipes", {
+  return Auth.fetch(DOMAIN + "/saved_recipes", {
 
       body: JSON.stringify(recipe),
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + Auth.getToken()
-
-
-      },
       method: "POST"
   })  .then((resp) => {
-          let json = resp.json()
-
-          return json
+          return resp
       })
+      .catch( err => console.log(err))
 }
 
 //These are all of our create methods
@@ -58,16 +50,16 @@ let sendText = (toText) => {
 
       body: JSON.stringify(toText),
       headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + Auth.getToken()
 
 
       },
       method: "POST"
-  })  .then((resp) => {
-          let json = resp.json()
-
-          return json
+  })
+  .then((resp) => {
+          return resp
       })
 }
 
