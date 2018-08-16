@@ -33,16 +33,9 @@ let createUser = (user) => {
 }
 
 let saveRecipes = (recipe) => {
-  return fetch(DOMAIN + "/saved_recipes", {
+  return Auth.fetch(DOMAIN + "/saved_recipes", {
 
       body: JSON.stringify(recipe),
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + Auth.getToken()
-
-
-      },
       method: "POST"
   })  .then((resp) => {
           let json = resp.json()
