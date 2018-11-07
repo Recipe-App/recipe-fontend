@@ -1,136 +1,172 @@
-import React, { Component } from 'react'
-import { getRecipes, saveRecipes, getPantryItems, deleteRecipe} from '../api/index'
-import { Image, Button, Panel } from 'react-bootstrap'
-import AuthService from '../services/AuthService'
-import ButtonFunction from './button'
-import '../App.css'
+import React, { Component, Fragment } from "react";
+import {
+  getRecipes,
+  saveRecipes,
+  getPantryItems,
+  deleteRecipe,
+  getSaved
+} from "../api/index";
+import { Image, Button, Panel } from "react-bootstrap";
+import AuthService from "../services/AuthService";
+import Loading from "./loading.js";
 
 class NewRecipes extends Component {
+  constructor(props) {
+    super(props);
+    this.Auth = new AuthService();
+    this.state = {
+      recipes: [],
+      isLoading: true,
+      saved: [],
+      id: []
+    };
+  }
 
-    constructor(props){
-        super(props)
-        this.Auth = new AuthService()
-        this.state = {
-            apiResp: {
-                recipes: []
-            },
-            saved: [],
-            clicked: [false,false,false,false,false,false,false,false,false,false]
-        }
-    }
-
-
-
-
-    processRecipe(recipe){  //It parses the raw recipe object to send to db
-      let toSave = {user_id: "", label: "", ingredients: "", url: "", image: "", }
-      toSave.user_id = this.Auth.getUserId()
-      toSave.label = recipe.label
-      toSave.ingredients = recipe.ingredients.map((obj) => {return obj.text}).join("//")
-      console.log("Ingredients String: ", recipe.ingredients)
-      console.log("Ingredients String: ", recipe.ingredients.map( obj => obj.text ))
-      console.log("Ingredients String: ", recipe.ingredients.map( obj => obj.text ).join("//"))
-      toSave.url = recipe.url
-      toSave.image = recipe.image
-
-      return toSave
-    }
-
-    handleClick(event){  // It adds the clicked recipe into state and prevents duplicate entries
-
-        let id = event.target.id.split(',')  //"id" is an array of two strings.  id[0] is equal to the index of the button.  id[1] is equal to the recipe url for the corresponding button.
-
-        let index = parseInt(id[0])
-        let url = id[1]
-
-        let { saved } = this.state
-        let { recipes } = this.state.apiResp
-        let { clicked } = this.state
-
-        clicked[index] = !clicked[index] //The button state is changed
-
-        let recipeObj = recipes.filter(resp => resp.recipe.url === id[1])[0]  //recipeObj is the first element of a 1 element array of a sincle recipe.  recipeObj = [{...}][0] = {...}
-
-        if (clicked[index]) {
-
-          let toSave = {recipe: this.processRecipe(recipeObj.recipe)}  //This method works
-          saveRecipes(toSave)
-              .then( resp => {
-                  console.log("Recipe Saved!", resp)
-                  let { saved } = this.state
-                  saved.push(resp)
-                  this.setState({ saved, clicked })
-              })
-              .catch( err => console.log(err))
-
-        } else {
-              let { saved } = this.state
-
-              let toDelete = saved.filter( recipe => recipe.url === url )[0]
-
-              saved = saved.filter( recipe => recipe.url !== url )
-
-              deleteRecipe(toDelete.id)
-                .then( resp => console.log(resp))
-                // .catch( err => console.log(err))
-
-              this.setState({ saved, clicked })
-
-        }
-
-    }
-
-    componentWillMount(){
-      let id = this.Auth.getUserId()
-      let array = []
-      getPantryItems(id)
-      .then(resp => {
-        array = [resp.proteins, resp.veggies]
-        array = array.join()
-
-        getRecipes(array)
-        .then(resp => {
-          let { apiResp } = this.state
-          let open = Array(resp.length).fill(false)
-          apiResp.recipes = resp
-          this.setState({ apiResp: apiResp,
-                          open: open
-                        })
-        })
-
+  processRecipe(recipe) {
+    let toSave = {};
+    toSave.user_id = this.Auth.getUserId();
+    toSave.label = recipe.label;
+    toSave.ingredients = recipe.ingredients
+      .map(obj => {
+        return obj.text;
       })
-    }
+      .join("//");
+    toSave.url = recipe.url;
+    toSave.image = recipe.image;
+    return toSave;
+  }
 
-    render() {
-
-        return(
-          <div className="flex-container">
-          {this.state.apiResp.recipes.map( (element, index) => {
-           return (
-          <Panel className="flex-item" defaultExpanded>
-               <Panel.Heading>
-                    <Image src={element.recipe.image} className="image"/><br/>
-               </Panel.Heading>
-               <Panel.Collapse>
-               <Panel.Body collapsible>
-               <ButtonFunction id={`${index},${element.recipe.url}`} onClick= {this.handleClick.bind(this)} style={!this.state.clicked[index] ? "danger" : "warning"} text={!this.state.clicked[index] ? "Save Recipe" : "Unsave Recipe"}/>
-                    <h1>
-                        <a className="title" href={element.recipe.url} target="_blank">{element.recipe.label}</a>
-                    </h1>
-                    <ul>{element.recipe.ingredients.map((elementTwo) =>{
-                      return(
-                      <div>
-                        <li> {elementTwo.text} </li>
-                      </div>
-                      )})}
-                    </ul>
-              </Panel.Body>
-              </Panel.Collapse>
-          </Panel>
-        )})}
-        </div>
+  handleClick = e => {
+    // It adds the clicked recipe into state and prevents duplicate entries
+    let newSaved = [...this.state.saved];
+    if (!newSaved.includes(e.target.getAttribute("url"))) {
+      let toSave = {
+        recipe: this.processRecipe(
+          this.state.recipes[e.target.getAttribute("index")].recipe
         )
+      };
+      saveRecipes(toSave)
+        .then(resp => resp)
+        .catch(err => console.log(err));
+      newSaved.push(e.target.getAttribute("url"));
+      this.setState({ saved: newSaved });
+    } else {
+      let id;
+      let updatedSaved = [];
+      this.state.id.recipes.map(x => {
+        if (e.target.getAttribute("url") === x.url) {
+          id = x.id;
+        } else {
+          updatedSaved.push(x.url);
+        }
+      });
+      deleteRecipe(id)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err));
+      this.setState({ saved: updatedSaved });
     }
+  };
+
+  getApi = () => {
+    let id = this.Auth.getUserId();
+    let array = [];
+    return getPantryItems(id)
+      .then(resp => {
+        array = [resp.proteins, resp.veggies];
+        array = array.join();
+        return array;
+      })
+      .then(resp => getRecipes(resp).then(resp => resp));
+  };
+
+  componentDidMount() {
+    this.getApi().then(resp1 => {
+      getSaved()
+        .then(resp => resp)
+        .then(resp => {
+          let loading = resp1 === undefined ? true : false
+          let prevSaved = resp.recipes.map(x => x.url);
+          let prevSavedId = resp.recipes.map(x => x.id);
+          this.setState({
+            recipes: resp1,
+            isLoading: loading,
+            saved: prevSaved,
+            id: resp
+          });
+        });
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.saved !== prevState.saved) {
+      getSaved().then(resp => {
+        this.setState({ id: resp });
+      });
+    }
+    if (this.state.recipes === undefined){
+      let check
+      let timedCall = () =>{
+        this.getApi().then(resp1 => {
+        check = resp1 === undefined ? true : false
+        let loading = resp1 === undefined ? true : false
+        this.setState({recipes: resp1, isLoading: loading})
+      })
+      console.log("hi");
+      console.log(check);
+    }
+    setTimeout(timedCall, 5000);
+
+    }
+  }
+
+  render() {
+    return this.state.isLoading ? (
+      <Loading />
+    ) : (
+      <div className="flex-container">
+        {this.state.recipes.map((element, index) => {
+          return (
+            <div className="flex-item">
+              <div className="picture">
+                <Image
+                  src={element.recipe.image}
+                  className="image"
+                  index={index}
+                  url={element.recipe.url}
+                  onClick={this.handleClick.bind(this)}
+                  style={
+                    this.state.saved.includes(element.recipe.url)
+                      ? { borderTop: "solid 8px #FA3D3D" }
+                      : { borderTop: "none" }
+                  }
+                />
+              </div>
+              <div className="text-container">
+                <div>
+                  <a
+                    className="title"
+                    href={element.recipe.url}
+                    target="_blank"
+                  >
+                    <p>{element.recipe.label}</p>
+                  </a>
+                  <ul>
+                    {element.recipe.ingredients.map(elementTwo => {
+                      return (
+                        <React.Fragment>
+                          <li> {elementTwo.text} </li>
+                        </React.Fragment>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
 
-export default NewRecipes
+export default NewRecipes;

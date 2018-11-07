@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../App.css'
 import { getSaved, deleteRecipe, sendText } from '../api/index'
 import { Button } from 'react-bootstrap'
+import Page from "../components/page.js"
 
 
 import SavedRecipes from '../components/savedRecipes'
@@ -91,7 +92,7 @@ class Saved extends Component {
     }
 
     handleSubmit = () => {
-      
+
         this.state.groceryList.forEach( recipe => {
           let toText = { text: { message: `-\n\n//${recipe.label}// \n\n${recipe.ingredients.split('//').map( string =>
             "- " + string + "\n\n").join('')}`}}
@@ -108,9 +109,8 @@ class Saved extends Component {
     }
 
     render() {
-      console.log(this.state.groceryList);
         return(
-          <div>
+          <Page>
           {this.state.saved.length != 0 ?
             <div>
 
@@ -144,7 +144,7 @@ class Saved extends Component {
 
 
           }
-          </div>
+        </Page>
         )
     }
 }

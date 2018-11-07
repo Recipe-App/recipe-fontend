@@ -15,13 +15,13 @@ class SavedRecipes extends Component {
                         <Panel className="flex-item">
 
                             <Panel.Heading>
-                                 <Image src={recipe.image} className="image"/><br/>
+                                 <Image src={recipe.image} className="image"/>
                             </Panel.Heading>
 
                             <Panel.Body>
                                 <Button id={`${recipe.id}`} bsStyle="danger" className="button" onClick={this.props.handleDelete}>Unsave</Button>
 
-                                <Button id={`${recipe.id}`} bsStyle="success"  className="button" onClick={this.props.handleAdd}>Add To Grocery List</Button><br/><br/>
+                                <Button id={`${recipe.id}`} bsStyle="success"  className="button" onClick={this.props.handleAdd}>Add To Grocery List</Button>
 
                                 <h3>
                                 <a href={recipe.url} className="title" target="_blank">{recipe.label}</a>
