@@ -1,53 +1,51 @@
-import React, { Component } from 'react'
-import { Image, Button, Panel } from 'react-bootstrap'
-import '../App.css'
+import React, { Component, Fragment } from "react";
 
 class SavedRecipes extends Component {
-
   render() {
+    return (
+      <div className="flex-container">
+        {this.props.saved.map((x, index) => {
+          return (
+            <div className="card-container">
+              <div className="picture">
+                <img
+                  src={x.image}
+                  className="image"
+                  id={`${x.id}`}
+                  onClick={this.props.handleDelete}
+                  style={{ borderTop: "solid 8px #FA3D3D" }}
+                />
+              </div>
 
-      return(
+              <button
+                id={`${x.id}`}
+                className="saved-button"
+                onClick={this.props.handleAdd}
+              >
+              </button>
 
-          <div className="flex-container">
-
-              { this.props.saved.map((recipe,index)=>{
-                    return (
-                        <Panel className="flex-item">
-
-                            <Panel.Heading>
-                                 <Image src={recipe.image} className="image"/>
-                            </Panel.Heading>
-
-                            <Panel.Body>
-                                <Button id={`${recipe.id}`} bsStyle="danger" className="button" onClick={this.props.handleDelete}>Unsave</Button>
-
-                                <Button id={`${recipe.id}`} bsStyle="success"  className="button" onClick={this.props.handleAdd}>Add To Grocery List</Button>
-
-                                <h3>
-                                <a href={recipe.url} className="title" target="_blank">{recipe.label}</a>
-                                </h3>
-
-                                <ul>
-                                    { recipe.ingredients.split('//').map( ingredient => {
-                                        return(
-                                        <div>
-                                          <li> {ingredient} </li>
-                                        </div>
-                                        )
-                                                                    }
-                                                                    )
-                                    }
-                                </ul>
-                            </Panel.Body>
-
-                        </Panel>
-                    )
-              })}
-
-          </div>
-
-      )
+              <div className="text-container">
+                <div>
+                  <a className="title" href={x.url} target="_blank">
+                    <p>{x.label}</p>
+                  </a>
+                  <ul>
+                    {x.ingredients.split("//").map(ingredient => {
+                      return (
+                        <Fragment>
+                          <li> {ingredient} </li>
+                        </Fragment>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
 
-export default SavedRecipes
+export default SavedRecipes;

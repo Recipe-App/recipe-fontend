@@ -9,6 +9,7 @@ import {
 import { Image, Button, Panel } from "react-bootstrap";
 import AuthService from "../services/AuthService";
 import Loading from "./loading.js";
+import Card from "./card.js";
 
 class NewRecipes extends Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class NewRecipes extends Component {
       getSaved()
         .then(resp => resp)
         .then(resp => {
-          let loading = resp1 === undefined ? true : false
+          let loading = resp1 === undefined ? true : false;
           let prevSaved = resp.recipes.map(x => x.url);
           let prevSavedId = resp.recipes.map(x => x.id);
           this.setState({
@@ -103,19 +104,16 @@ class NewRecipes extends Component {
         this.setState({ id: resp });
       });
     }
-    if (this.state.recipes === undefined){
-      let check
-      let timedCall = () =>{
+    if (this.state.recipes === undefined) {
+      let check;
+      let timedCall = () => {
         this.getApi().then(resp1 => {
-        check = resp1 === undefined ? true : false
-        let loading = resp1 === undefined ? true : false
-        this.setState({recipes: resp1, isLoading: loading})
-      })
-      console.log("hi");
-      console.log(check);
-    }
-    setTimeout(timedCall, 5000);
-
+          check = resp1 === undefined ? true : false;
+          let loading = resp1 === undefined ? true : false;
+          this.setState({ recipes: resp1, isLoading: loading });
+        });
+      };
+      setTimeout(timedCall, 5000);
     }
   }
 
@@ -124,46 +122,17 @@ class NewRecipes extends Component {
       <Loading />
     ) : (
       <div className="flex-container">
-        {this.state.recipes.map((element, index) => {
-          return (
-            <div className="flex-item">
-              <div className="picture">
-                <Image
-                  src={element.recipe.image}
-                  className="image"
-                  index={index}
-                  url={element.recipe.url}
-                  onClick={this.handleClick.bind(this)}
-                  style={
-                    this.state.saved.includes(element.recipe.url)
-                      ? { borderTop: "solid 8px #FA3D3D" }
-                      : { borderTop: "none" }
-                  }
-                />
-              </div>
-              <div className="text-container">
-                <div>
-                  <a
-                    className="title"
-                    href={element.recipe.url}
-                    target="_blank"
-                  >
-                    <p>{element.recipe.label}</p>
-                  </a>
-                  <ul>
-                    {element.recipe.ingredients.map(elementTwo => {
-                      return (
-                        <React.Fragment>
-                          <li> {elementTwo.text} </li>
-                        </React.Fragment>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {this.state.recipes.map((element, index) => (
+          <Card
+            image={element.recipe.image}
+            index={index}
+            url={element.recipe.url}
+            saved={this.state.saved}
+            label={element.recipe.label}
+            ingredients={element.recipe.ingredients}
+            handleClick={this.handleClick}
+          />
+        ))}
       </div>
     );
   }
