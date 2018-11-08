@@ -44,9 +44,8 @@
   justify-content: space-between;
 }
 
-.flex-item {
-  flex-basis: 300px;
-  align-self: auto;
+.card-container {
+  width: 300px;
   margin: 40px;
   background-color: #F7F5F5;
   border-radius: 10px;
@@ -54,6 +53,8 @@
 }
 .image{
   padding: 0;
+  width: 300px;
+  height: 300px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 
@@ -112,18 +113,15 @@
   color: white;
   font-weight: bold;
   position:fixed;
-  top: 10px;
+  bottom: 10px;
   right: 20px;
   width: 200px;
-  background-color: red;
+  background-color: #B2DB66;
 }
 
 
 /* /////////////////////////////////Pantry-form/////////////////////////////// */
 
-.h1Landing {
-  font-weight: bold;
-}
 .landingFormContainer{
   display: flex;
   justify-content: center;
@@ -191,7 +189,7 @@
   border-radius: 5px;
   background-color: #F7F5F5;
   justify-self: center;
-  animation: opacity 300ms linear;
+  animation: opacity 400ms linear;
 }
 
 .loading-square{
@@ -215,6 +213,18 @@
 
 
 /* /////////////////////////////////Loading/////////////////////////////// */
+/* /////////////////////////////////saved/////////////////////////////// */
+.saved-button{
+  margin: 10px 105px 0 105px;
+  background-color: #B2DB66;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 90px;
+  height: 30px;
+}
+/* /////////////////////////////////saved/////////////////////////////// */
 
 
 .title{
@@ -239,19 +249,7 @@
 }
 
 
-button {
-    border:none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: red;
-    text-align: center;
-    cursor: pointer;
-    width: flex;
-    font-size: 20px;
-    align-self: center;
-}
+
 
 button:hover {
   opacity: .7;

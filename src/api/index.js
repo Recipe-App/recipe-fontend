@@ -1,7 +1,7 @@
 import AuthService from "../services/AuthService";
 
-// const DOMAIN = "https://the-recipe-app.herokuapp.com"
-const DOMAIN = "http://localhost:3001";
+const DOMAIN = "https://recipe-app-text.herokuapp.com/"
+// const DOMAIN = "http://localhost:3001";
 const Auth = new AuthService();
 
 let checkIfToken = () => {
